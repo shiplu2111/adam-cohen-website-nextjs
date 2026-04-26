@@ -10,9 +10,33 @@ import { getSettings } from "@/lib/cms";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings("site");
+  const siteTitle = settings?.name || "Adam Cohen Today";
+  const siteDesc = settings?.description || "Expert insights in Real Estate, Business Concierge, and Private Equity.";
+  const iconUrl = "https://adam-cohen.vercel.app/assets/1-BwDLCnC3.png";
+
   return {
-    title: settings?.title || "Adam Cohen Today | Real Estate, Business & More",
-    description: settings?.description || "Adam Cohen Today - Expert insights in Real Estate, Business Concierge, and Private Equity.",
+    title: {
+      default: siteTitle,
+      template: `%s | ${siteTitle}`,
+    },
+    description: siteDesc,
+    icons: {
+      icon: iconUrl,
+      shortcut: iconUrl,
+      apple: iconUrl,
+    },
+    openGraph: {
+      title: siteTitle,
+      description: siteDesc,
+      images: [iconUrl],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteTitle,
+      description: siteDesc,
+      images: [iconUrl],
+    },
   };
 }
 

@@ -2,6 +2,8 @@ import { getCmsData } from "@/lib/cms";
 import CohenTvClient, { CohenTvVideo } from "./_components/CohenTvClient";
 import { Metadata } from "next";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Cohen TV | Adam Cohen",
   description: "Watch exclusive insights on real estate, wealth management, and strategic business growth.",

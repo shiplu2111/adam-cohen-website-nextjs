@@ -1,6 +1,8 @@
 import AboutPageClient from "./_components/AboutPageClient";
 import { getCmsData } from "@/lib/cms";
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: "About Adam Cohen | Engineering Empires",
   description: "Learn about Adam Cohen's journey from a young entrepreneur to a global titan with over $500M in assets under strategy.",

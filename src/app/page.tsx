@@ -12,6 +12,8 @@ import PageTransition from "@/components/PageTransition";
 import { getCmsData } from "@/lib/cms";
 import { Linkedin, Share2, Code2, Smartphone } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const [heroData, podcastsData, testimonialsData, projectsData, servicesData] = await Promise.all([
     getCmsData("hero"),

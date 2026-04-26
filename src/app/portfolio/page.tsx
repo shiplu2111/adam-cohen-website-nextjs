@@ -22,7 +22,9 @@ const performanceStats = [
   { val: "15+", label: "Years of Market Mastery" },
 ];
 
-export const metadata = {
+export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
   title: "Portfolio | Proven Results & Real Deals | Adam Cohen",
   description: "Explore the track record of high-stakes acquisitions and strategic transformations by Adam Cohen. $1.4B+ total transaction volume.",
 };
