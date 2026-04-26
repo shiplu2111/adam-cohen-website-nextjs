@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+export const dynamic = 'force-dynamic';
 import { Providers } from "@/components/Providers";
 import LenisProvider from "@/components/LenisProvider";
 import Navbar from "@/components/Navbar";
