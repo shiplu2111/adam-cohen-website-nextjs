@@ -1,5 +1,6 @@
 import PortfolioPageClient from "./_components/PortfolioPageClient";
 import { getCmsData } from "@/lib/cms";
+import { Metadata } from "next";
 
 const caseStudies = [
   {
