@@ -4,6 +4,26 @@ import { motion } from "framer-motion";
 
 const socialStats = [
   {
+    platform: "LinkedIn",
+    value: "34K+",
+    label: "FOLLOWERS",
+    icon: (
+      <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.454c.981 0 1.775-.773 1.775-1.729V1.729C24 .774 23.206 0 22.225 0z" />
+      </svg>
+    )
+  },
+  {
+    platform: "YouTube",
+    value: "Growing",
+    label: "CHANNEL",
+    icon: (
+      <svg className="w-10 h-10" viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+      </svg>
+    )
+  },
+  {
     platform: "Instagram",
     value: "3,048,949",
     label: "FOLLOWERS",
@@ -53,37 +73,44 @@ const socialStats = [
 ];
 
 const StatsSection = ({ stats }: { stats?: any[] }) => {
-  const displayStats = stats && stats.length > 0 ? stats.map(s => ({
-    ...s,
-    icon: socialStats.find(os => os.platform.toLowerCase() === s.platform.toLowerCase())?.icon || socialStats[0].icon
-  })) : socialStats;
+  const displayStats = stats && stats.length > 0 ? stats : [];
 
   return (
-    <section className="bg-white py-12 border-b border-gray-100">
+    <section className="bg-white py-16 border-b border-gray-100 overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-        <div className="flex flex-wrap justify-center gap-12 md:gap-x-24">
-          {displayStats.map((stat, i) => (
-            <motion.div
-              key={stat.platform}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-5"
-            >
-              <div className="flex-shrink-0">
-                {stat.icon}
-              </div>
-              <div className="flex flex-col">
-                <p className="text-3xl md:text-3xl font-black text-[#1a2b4b] leading-none mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-xs font-bold text-[#718096] tracking-[0.15em] uppercase leading-none">
-                  {stat.label}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 lg:gap-6">
+          {displayStats.map((stat, i) => {
+            const icon = socialStats.find(os => os.platform.toLowerCase() === stat.platform.toLowerCase())?.icon || socialStats[0].icon;
+            
+            return (
+              <motion.div
+                key={stat.platform}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group relative flex flex-col items-center justify-center w-full p-8 md:p-10 bg-white border border-gray-100 rounded-3xl transition-all duration-500 hover:shadow-2xl hover:border-transparent hover:-translate-y-2 overflow-hidden"
+              >
+                {/* Decorative background element */}
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#008db1]/5 rounded-full blur-2xl group-hover:bg-[#008db1]/10 transition-colors duration-500" />
+                
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  <div className="mb-6 transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
+                    {icon}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-black text-[#1a2b4b] mb-2 transition-colors duration-300 group-hover:text-[#008db1]">
+                    {stat.platform}
+                  </h3>
+                  <p className="text-sm md:text-base font-medium text-[#008db1] tracking-tight">
+                    {stat.value} {stat.label}
+                  </p>
+                </div>
+                
+                {/* Bottom line accent */}
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#1a2b4b] to-[#008db1] transition-all duration-500 group-hover:w-full" />
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

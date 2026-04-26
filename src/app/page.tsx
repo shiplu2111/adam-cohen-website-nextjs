@@ -13,15 +13,14 @@ import { getCmsData } from "@/lib/cms";
 import { Linkedin, Share2, Code2, Smartphone } from "lucide-react";
 
 export default async function Home() {
-  const [heroData, socialStatsData, podcastsData, testimonialsData, projectsData, servicesData] = await Promise.all([
+  const [heroData, podcastsData, testimonialsData, projectsData, servicesData] = await Promise.all([
     getCmsData("hero"),
-    getCmsData("social-stats"),
     getCmsData("podcasts"),
     getCmsData("testimonials"),
     getCmsData("projects"),
     getCmsData("services")
   ]);
-  
+
   // Map API fields to Component props
   const slides = Array.isArray(heroData) && heroData.length > 0 ? heroData.filter((s: any) => s.active).map((s: any) => ({
     id: s.id,
@@ -38,57 +37,59 @@ export default async function Home() {
     portrait: s.portrait_image
   })) : [];
 
-  const stats = Array.isArray(socialStatsData) && socialStatsData.length > 0 ? socialStatsData.filter((s: any) => s.active).map((s: any) => ({
-    platform: s.platform,
-    value: s.value,
-    label: s.label
-  })) : [];
+  const stats = [
+    { platform: "LinkedIn", value: "34K+", label: "followers" },
+    { platform: "YouTube", value: "Growing", label: "channel" },
+    { platform: "Facebook", value: "Active", label: "community" },
+    { platform: "Instagram", value: "Visual", label: "brand" },
+    { platform: "X", value: "Real-time", label: "updates" }
+  ];
 
-  const services = Array.isArray(servicesData) && servicesData.length > 0 
+  const services = Array.isArray(servicesData) && servicesData.length > 0
     ? servicesData.filter((s: any) => s.active).map((s: any) => ({
-        title: s.name,
-        description: s.description,
-        tag: s.tag,
-        href: s.link || `/business-concierge/${s.name.toLowerCase().replace(/\s+/g, '-')}`,
-        icon: s.icon
-      }))
+      title: s.name,
+      description: s.description,
+      tag: s.tag,
+      href: s.link || `/business-concierge/${s.name.toLowerCase().replace(/\s+/g, '-')}`,
+      icon: s.icon
+    }))
     : [];
 
   const projects = Array.isArray(projectsData) && projectsData.length > 0
     ? projectsData.filter((p: any) => p.status === "Live").map((p: any) => ({
-        id: p.id,
-        title: p.title,
-        category: p.category,
-        description: p.description || "",
-        image: p.thumbnail,
-        location: p.location,
-        metric: p.metric
-      }))
+      id: p.id,
+      title: p.title,
+      category: p.category,
+      description: p.description || "",
+      image: p.thumbnail,
+      location: p.location,
+      metric: p.metric
+    }))
     : [];
 
-  const liveEpisodes = Array.isArray(podcastsData) && podcastsData.length > 0 
+  const liveEpisodes = Array.isArray(podcastsData) && podcastsData.length > 0
     ? podcastsData.map((p: any) => ({
-        id: p.id,
-        number: p.episode_number || "0",
-        title: p.title,
-        description: p.description || "",
-        duration: p.duration || "0m",
-        tag: p.category || "General",
-        link: p.link,
-        host: p.host,
-        thumbnail: p.thumbnail
-      }))
+      id: p.id,
+      number: p.episode_number || "0",
+      title: p.title,
+      description: p.description || "",
+      duration: p.duration || "0m",
+      tag: p.category || "General",
+      link: p.link,
+      host: p.host,
+      thumbnail: p.thumbnail
+    }))
     : [];
 
   const testimonials = Array.isArray(testimonialsData) && testimonialsData.length > 0
     ? testimonialsData.filter((t: any) => t.approved).map((t: any) => ({
-        id: t.id,
-        author: t.author,
-        role: t.role,
-        text: t.text,
-        avatar: t.avatar,
-        rating: t.rating
-      }))
+      id: t.id,
+      author: t.author,
+      role: t.role,
+      text: t.text,
+      avatar: t.avatar,
+      rating: t.rating
+    }))
     : [];
 
   return (

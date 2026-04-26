@@ -13,8 +13,21 @@ export async function getCmsData(resource: string, params: Record<string, string
     const res = await fetch(url, {
       cache: 'no-store'
     });
-    const data = await res.json();
-    return data.data || [];
+
+    if (!res.ok) {
+        const text = await res.text();
+        console.error(`Fetch failed for ${url}: ${res.status} ${res.statusText}`, text.slice(0, 200));
+        return [];
+    }
+
+    try {
+        const data = await res.json();
+        return data.data || [];
+    } catch (parseError) {
+        const text = await res.text();
+        console.error(`Failed to parse JSON for ${url}:`, parseError, "Response snippet:", text.slice(0, 200));
+        return [];
+    }
   } catch (error) {
     console.error(`Failed to fetch ${resource}:`, error);
     return [];
@@ -26,8 +39,21 @@ export async function getSettings(group: string = "site") {
     const res = await fetch(`${API_URL}/public/settings/${group}`, {
        cache: 'no-store'
     });
-    const data = await res.json();
-    return data.data || null;
+
+    if (!res.ok) {
+        const text = await res.text();
+        console.error(`Fetch failed for settings ${group}: ${res.status} ${res.statusText}`, text.slice(0, 200));
+        return null;
+    }
+
+    try {
+        const data = await res.json();
+        return data.data || null;
+    } catch (parseError) {
+        const text = await res.text();
+        console.error(`Failed to parse JSON for settings ${group}:`, parseError, "Response snippet:", text.slice(0, 200));
+        return null;
+    }
   } catch (error) {
     console.error(`Failed to fetch settings ${group}:`, error);
     return null;

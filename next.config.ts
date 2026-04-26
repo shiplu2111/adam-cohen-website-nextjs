@@ -6,12 +6,12 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: '**',
+        protocol: 'https',
+        hostname: 'act.saracodelabs.com.bd',
       },
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'act.saracodelabs.com.bd',
       },
     ],
   },
