@@ -174,7 +174,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                       className="relative h-full w-full max-w-[450px] flex items-end"
                     >
                       {/* Image with Mask */}
-                      <div className={`w-full h-[90%] relative z-20 overflow-hidden ${slide.mask === 'hexagon' ? 'mask-hexagon' :
+                      <div className={`w-full h-full relative z-20 overflow-hidden ${slide.mask === 'hexagon' ? 'mask-hexagon' :
                         slide.mask === 'sharp-cut' ? 'mask-sharp-cut' :
                           slide.mask === 'arrow-right' ? 'mask-arrow-right' :
                             ''
