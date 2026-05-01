@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
 import MagneticButton from "@/components/MagneticButton";
+import Image from "next/image";
+import Link from "next/link";
 
 interface StoryBlock {
   age: string;
@@ -333,6 +335,53 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
                   <p className="text-muted-foreground leading-relaxed italic">{point.description}</p>
                 </motion.div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Gallery Preview Section */}
+        <section className="section-padding px-6">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-14"
+            >
+              <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-medium">Moments</p>
+              <h2 className="text-4xl md:text-5xl font-display font-bold">
+                Life in <span className="gold-gradient-text">Pictures</span>
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+              {[1, 2, 3, 4].map((num, i) => (
+                <motion.div
+                  key={num}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-xl"
+                >
+                  <Image
+                    src={`/gallery/${num}.jpeg`}
+                    alt={`Gallery image ${num}`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <Link
+                href="/gallery"
+                className="hero-btn inline-flex items-center gap-2 !px-10 !py-4 text-lg"
+              >
+                View Full Gallery →
+              </Link>
             </div>
           </div>
         </section>
