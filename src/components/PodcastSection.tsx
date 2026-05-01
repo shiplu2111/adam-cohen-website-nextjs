@@ -72,7 +72,7 @@ const PodcastSection = ({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-[#D4AF37] text-sm tracking-[0.3em] uppercase mb-4 font-medium"
+              className="text-[#D4AF37] text-sm tracking-[0.3em] uppercase mb-4 font-bold"
             >
               Watch & Listen
             </motion.p>
@@ -98,25 +98,16 @@ const PodcastSection = ({
               href="https://youtube.com/@adamcohentoday"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold tracking-wide transition-all duration-300 hover:scale-105"
-              style={{
-                backgroundColor: "rgba(212,175,55,0.08)",
-                border: "1px solid rgba(212,175,55,0.2)",
-                color: "white",
-              }}
+              className="flex items-center gap-2.5 px-6 py-3 rounded-full text-xs font-bold tracking-wide transition-all duration-300 hover:scale-105 border border-[#D4AF37]/30 bg-white/5 hover:bg-white/10 text-white"
             >
-              <Youtube className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
+              <Youtube className="w-5 h-5 text-[#D4AF37]" />
               YouTube
             </a>
             <Link
               href="/podcast#registration-form"
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold tracking-wide transition-all duration-300 hover:scale-105"
-              style={{
-                backgroundColor: "#D4AF37",
-                color: "black",
-              }}
+              className="flex items-center gap-2.5 px-6 py-3 rounded-full text-xs font-bold tracking-wide transition-all duration-300 hover:scale-105 bg-[#D4AF37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)]"
             >
-              <UserPlus className="w-5 h-5 flex-shrink-0" />
+              <UserPlus className="w-5 h-5" />
               Podcast with Adam
             </Link>
           </motion.div>
@@ -165,7 +156,7 @@ const PodcastSection = ({
               <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white leading-tight group-hover:text-[#D4AF37] transition-colors duration-300">
                 {activeEp.title}
               </h3>
-              <p className="font-light leading-relaxed mb-8 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>{activeEp.description}</p>
+              <p className="font-light leading-relaxed mb-8 text-sm text-white/50">{activeEp.description}</p>
               <div className="flex items-center gap-4">
                 {!activeEp.is_video && (
                   <button
@@ -186,10 +177,10 @@ const PodcastSection = ({
                 )}
                 {activeEp.is_video && (
                   <div className="flex items-center gap-2 text-[#D4AF37] font-bold text-xs uppercase tracking-widest bg-[#D4AF37]/10 px-4 py-2 rounded-lg border border-[#D4AF37]/20">
-                    <Play className="h-4 w-4 fill-primary" /> Watching Video
+                    <Play className="h-4 w-4 fill-current" /> Watching Video
                   </div>
                 )}
-                <Link href="/podcast" className="text-sm font-semibold flex items-center gap-1.5 transition-colors duration-300 hover:text-[#D4AF37]" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <Link href="/podcast" className="text-sm font-semibold flex items-center gap-1.5 transition-colors duration-300 hover:text-[#D4AF37] text-white/50">
                   All Episodes <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -197,7 +188,7 @@ const PodcastSection = ({
           </motion.div>
 
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <p className="text-xs font-bold tracking-[0.25em] uppercase mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>Recent Episodes</p>
+            <p className="text-xs font-bold tracking-[0.25em] uppercase mb-1 text-white/30">Recent Episodes</p>
             {listEps.map((ep, i) => (
               <motion.div
                 key={ep.number}

@@ -134,7 +134,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-            className="mt-6 text-lg max-w-xl font-light" style={{ color: "rgba(255,255,255,0.6)" }}
+            className="mt-6 text-lg max-w-xl font-light text-white/60"
           >
             Raw conversations on business, wealth, real estate, and the mindset of high-performers — no fluff, no gatekeeping.
           </motion.p>
@@ -148,8 +148,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
               href="https://youtube.com/@adamcohentoday"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-[#D4AF37]/30 text-sm font-semibold transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10"
-              style={{ color: "white" }}
+              className="flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-[#D4AF37]/30 text-sm font-semibold transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 text-white"
             >
               <Youtube className="w-5 h-5 text-[#D4AF37]" />
               YouTube
@@ -201,41 +200,41 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                     </MediaControlBar>
                   </MediaController>
                 </div>
-
-                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">{activeVideo.title}</h2>
-
-                {/* Channel & Subscribe Info (Mirroring Screenshot) */}
-                <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-white/10 mb-8">
+                
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-black dark:text-white">{activeVideo.title}</h2>
+                
+                {/* Channel & Subscribe Info */}
+                <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-black/10 dark:border-white/10 mb-8">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                    <div className="w-14 h-14 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center overflow-hidden">
                       <img src="/logo.png" alt="Adam Cohen" className="w-10 h-10 object-contain" onError={(e) => e.currentTarget.src = 'https://ui-avatars.com/api/?name=Adam+Cohen&background=D4AF37&color=000'} />
                     </div>
                     <div>
-                      <p className="font-bold text-lg text-white leading-tight">Adam Cohen Today</p>
-                      <p className="text-xs text-white/40">7+ subscriber</p>
+                      <p className="font-bold text-lg text-black dark:text-white leading-tight">Adam Cohen Today</p>
+                      <p className="text-xs text-black/40 dark:text-white/40">7+ subscriber</p>
                     </div>
                     <a
                       href="https://youtube.com/@adamcohentoday?sub_confirmation=1"
                       target="_blank"
-                      className="ml-4 px-6 py-2.5 rounded-full bg-white text-black font-bold text-sm transition-transform hover:scale-105 active:scale-95"
+                      className="ml-4 px-6 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-bold text-sm transition-transform hover:scale-105 active:scale-95"
                     >
                       Subscribe
                     </a>
                   </div>
-
+                  
                   <div className="flex items-center gap-3">
-                    <button onClick={handleShare} className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium py-2.5 px-6 rounded-full transition-colors border border-white/10">
+                    <button onClick={handleShare} className="flex items-center gap-2 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-black dark:text-white text-sm font-medium py-2.5 px-6 rounded-full transition-colors border border-black/10 dark:border-white/10">
                       <Share2 className="w-4 h-4" /> Share
                     </button>
-                    <button onClick={handleCopy} className={cn("flex items-center gap-2 text-sm font-medium py-2.5 px-6 rounded-full transition-all border", copied ? "bg-green-500/10 text-green-500 border-green-500/30" : "bg-white/5 hover:bg-white/10 text-white border-white/10")}>
+                    <button onClick={handleCopy} className={cn("flex items-center gap-2 text-sm font-medium py-2.5 px-6 rounded-full transition-all border", copied ? "bg-green-500/10 text-green-500 border-green-500/30" : "bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-black dark:text-white border-black/10 dark:border-white/10")}>
                       {copied ? <><Check className="w-4 h-4" /> Copied</> : <><Copy className="w-4 h-4" /> Copy Link</>}
                     </button>
                   </div>
                 </div>
 
                 {activeVideo.description && (
-                  <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
-                    <p className="text-white/80 font-light leading-relaxed whitespace-pre-line">{activeVideo.description}</p>
+                  <div className="bg-black/5 dark:bg-white/5 rounded-2xl p-6 border border-black/5 dark:border-white/5">
+                    <p className="text-black/80 dark:text-white/80 font-light leading-relaxed whitespace-pre-line">{activeVideo.description}</p>
                   </div>
                 )}
               </div>
@@ -255,7 +254,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                         pauseTrack();
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
-                      className="flex gap-3 group cursor-pointer p-3 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-transparent hover:border-white/10"
+                      className="flex gap-3 group cursor-pointer p-3 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all border border-transparent hover:border-black/10 dark:hover:border-white/10"
                     >
                       <div className="relative w-36 aspect-video rounded-xl overflow-hidden flex-shrink-0 bg-black/40">
                         {video.thumbnail ? (
@@ -270,10 +269,10 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                         </div>
                       </div>
                       <div className="flex flex-col justify-center overflow-hidden">
-                        <h4 className="text-sm text-black  font-bold text-white line-clamp-2 leading-tight group-hover:text-[#D4AF37] transition-colors mb-1">
+                        <h4 className="text-sm font-bold text-black dark:text-white line-clamp-2 leading-tight group-hover:text-[#D4AF37] transition-colors mb-1">
                           {video.title}
                         </h4>
-                        <p className="text-[10px] text-white/40 uppercase tracking-wider font-mono">{video.duration || "VIDEO"}</p>
+                        <p className="text-[10px] text-black/40 dark:text-white/40 uppercase tracking-wider font-mono">{video.duration || "VIDEO"}</p>
                       </div>
                     </div>
                   ))}
@@ -285,15 +284,20 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
       )}
 
       {/* Registration Form Section */}
-      <section id="registration-form" className="py-24 px-6 relative overflow-hidden bg-black/40">
-        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #D4AF37, transparent 70%)' }} />
+      <section id="registration-form" className="py-24 px-6 relative overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(135deg, #0B0B0B 0%, #1a1200 60%, #0B0B0B 100%)" }}
+        />
+        <div className="absolute inset-0 opacity-10"
+          style={{ background: "radial-gradient(circle at 50% 50%, #D4AF37, transparent 70%)" }} />
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="w-16 h-16 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center mx-auto mb-6">
               <UserPlus className="w-8 h-8 text-[#D4AF37]" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl font-display font-bold mb-6">
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
               Podcast with <span className="gold-gradient-text">Adam Cohen</span>
             </motion.h2>
             <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-white/60 max-w-xl mx-auto font-light">
@@ -306,7 +310,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="glass-card p-8 md:p-12 border border-white/10 shadow-2xl"
+            className="glass-card p-8 md:p-12 border border-white/10 shadow-2xl bg-black/40 backdrop-blur-xl"
           >
             <form className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
@@ -340,20 +344,20 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding border-t border-white/5">
-        <div className="max-w-4xl mx-auto text-center glass-card p-12 md:p-20 border border-primary/20">
-          <Mic className="w-10 h-10 text-primary mx-auto mb-6" />
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+      <section className="section-padding border-t border-black/5 dark:border-white/5 bg-background">
+        <div className="max-w-4xl mx-auto text-center glass-card p-12 md:p-20 border border-[#D4AF37]/20">
+          <Mic className="w-10 h-10 text-[#D4AF37] mx-auto mb-6" />
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-black dark:text-white">
             Never Miss an <span className="gold-gradient-text">Episode</span>
           </h2>
-          <p className="text-muted-foreground mb-10 max-w-xl mx-auto font-light">
+          <p className="text-black/60 dark:text-white/60 mb-10 max-w-xl mx-auto font-light">
             Subscribe on YouTube to get raw conversations on business and wealth delivered every week.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://youtube.com/@adamcohentoday" target="_blank" className="hero-btn inline-flex items-center gap-2 px-10">
+            <a href="https://youtube.com/@adamcohentoday" target="_blank" className="bg-[#D4AF37] text-black font-bold py-4 px-10 rounded-xl inline-flex items-center gap-2 hover:scale-105 transition-transform">
               <Youtube className="w-5 h-5" /> Subscribe on YouTube
             </a>
-            <Link href="/contact" className="hero-btn-outline inline-flex items-center gap-2 px-10">
+            <Link href="/contact" className="border border-[#D4AF37] text-[#D4AF37] font-bold py-4 px-10 rounded-xl inline-flex items-center gap-2 hover:bg-[#D4AF37]/10 transition-colors">
               Contact Us <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
