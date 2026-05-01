@@ -15,12 +15,13 @@ import { Linkedin, Share2, Code2, Smartphone } from "lucide-react";
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const [heroData, podcastsData, testimonialsData, projectsData, servicesData] = await Promise.all([
+  const [heroData, podcastsData, testimonialsData, projectsData, servicesData, cohenTvVideosData] = await Promise.all([
     getCmsData("hero"),
     getCmsData("podcasts"),
     getCmsData("testimonials"),
     getCmsData("projects"),
-    getCmsData("services")
+    getCmsData("services"),
+    getCmsData("cohen-tv-videos")
   ]);
 
   // Map API fields to Component props
@@ -70,19 +71,22 @@ export default async function Home() {
     }))
     : [];
 
-  const liveEpisodes = Array.isArray(podcastsData) && podcastsData.length > 0
-    ? podcastsData.map((p: any) => ({
-      id: p.id,
-      number: p.episode_number || "0",
-      title: p.title,
-      description: p.description || "",
-      duration: p.duration || "0m",
-      tag: p.category || "General",
-      link: p.link,
-      host: p.host,
-      thumbnail: p.thumbnail
-    }))
+  const podcastVideos = Array.isArray(cohenTvVideosData)
+    ? cohenTvVideosData.filter((v: any) => v.type === 'Podcast' && v.is_published).map((v: any) => ({
+      id: v.id,
+      number: String(v.order || "0"),
+      title: v.title,
+      description: v.description || "",
+      duration: v.duration || "0m",
+      tag: "Video",
+      link: v.link,
+      host: v.host || "Adam Cohen",
+      thumbnail: v.thumbnail,
+      is_video: true
+    })).slice(0, 4)
     : [];
+
+  const liveEpisodes = podcastVideos;
 
   const testimonials = Array.isArray(testimonialsData) && testimonialsData.length > 0
     ? testimonialsData.filter((t: any) => t.approved).map((t: any) => ({
