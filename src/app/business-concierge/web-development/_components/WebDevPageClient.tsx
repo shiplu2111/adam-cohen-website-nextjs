@@ -8,6 +8,7 @@ import {
   ArrowRight, CheckCircle2, Star
 } from "lucide-react";
 import { ReactNode } from "react";
+import Image from "next/image";
 
 interface Service {
   icon: ReactNode;
@@ -135,6 +136,150 @@ export default function WebDevPageClient({
                 </ul>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Feature 1: Architecture */}
+      <section className="section-padding px-6 bg-secondary/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-video md:aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/wd-architecture.png" 
+                alt="Scalable Backend Architecture Mockup" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="space-y-6">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-display font-bold"
+              >
+                Scalable <span className="gold-gradient-text">Backend Infrastructure</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="text-lg text-muted-foreground font-light leading-relaxed"
+              >
+                We architect robust, scalable backend systems designed to handle enterprise-level traffic without breaking a sweat. From complex relational databases to microservices and cloud deployment, we ensure your platform is built on a solid foundation.
+              </motion.p>
+              <motion.ul 
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="space-y-3 pt-4"
+              >
+                {[
+                  "Secure API Development (REST & GraphQL)",
+                  "Cloud Infrastructure (AWS, Vercel)",
+                  "High-Availability Database Design",
+                  "Automated CI/CD Pipelines",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                    <span className="text-foreground/90 font-medium">{item}</span>
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature 2: Frontend */}
+      <section className="section-padding px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="order-2 md:order-1 space-y-6">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-display font-bold"
+              >
+                Premium <span className="gold-gradient-text">Frontend Experiences</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="text-lg text-muted-foreground font-light leading-relaxed"
+              >
+                First impressions matter. We merge cutting-edge UI design with highly responsive code to deliver immersive, frictionless user experiences. We leverage modern frameworks like React and Next.js to build lightning-fast interfaces.
+              </motion.p>
+              <motion.ul 
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="space-y-3 pt-4"
+              >
+                {[
+                  "Pixel-Perfect UI Implementation",
+                  "Interactive Web Animations",
+                  "Responsive Mobile-First Design",
+                  "Accessibility & Cross-Browser Compliance",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                    <span className="text-foreground/90 font-medium">{item}</span>
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
+            <div className="order-1 md:order-2 relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-video md:aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/wd-frontend.png" 
+                alt="Premium Frontend UI/UX Design Mockup" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature 3: Performance */}
+      <section className="section-padding px-6 bg-secondary/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-video md:aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/wd-performance.png" 
+                alt="Website Performance and Speed Metrics Dashboard" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="space-y-6">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-display font-bold"
+              >
+                Speed & <span className="gold-gradient-text">Core Web Vitals</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="text-lg text-muted-foreground font-light leading-relaxed"
+              >
+                A slow website costs you conversions and search rankings. We obsess over performance metrics, optimizing every image, script, and database query to ensure your application loads instantly and passes Google's Core Web Vitals with flying colors.
+              </motion.p>
+              <motion.ul 
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="space-y-3 pt-4"
+              >
+                {[
+                  "Sub-second Page Load Times",
+                  "Server-Side Rendering (SSR) Optimization",
+                  "Advanced Asset Caching Strategies",
+                  "Technical SEO Enhancements",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                    <span className="text-foreground/90 font-medium">{item}</span>
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
           </div>
         </div>
       </section>
