@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'act.saracodelabs.com.bd',
+        hostname: 'images.unsplash.com',
       },
     ],
   },
