@@ -116,7 +116,7 @@ export default function CohenTvClient({ initialVideos, settings }: CohenTvClient
             <div className="flex-1 lg:max-w-[60%] xl:max-w-[63%]">
               <div className="flex flex-col">
                 <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black mb-4 shadow-xl border border-white/5 flex flex-col justify-end isolate transform-gpu">
-                  <MediaController className="w-full h-full absolute inset-0 overscroll-none" autohide={2}>
+                  <MediaController className="w-full h-full absolute inset-0 overscroll-none" autohide="2">
                     <ReactPlayer
                       key={activeVideo.link}
                       src={activeVideo.link}

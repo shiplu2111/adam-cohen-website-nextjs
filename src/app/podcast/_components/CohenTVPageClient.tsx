@@ -228,7 +228,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
               {/* Main Video Player */}
               <div className="flex-1 lg:max-w-[70%]">
                 <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black mb-6 shadow-2xl border border-white/5 isolate transform-gpu">
-                  <MediaController className="w-full h-full absolute inset-0 overscroll-none" autohide={2}>
+                  <MediaController className="w-full h-full absolute inset-0 overscroll-none" autohide="2">
                     <ReactPlayer
                       key={activeVideo.link}
                       src={activeVideo.link}
@@ -376,7 +376,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="glass-card p-8 md:p-12 border border-white/10 shadow-2xl bg-black/40 backdrop-blur-xl"
+            className="p-8 md:p-12 border border-white/10 shadow-2xl bg-black/60 backdrop-blur-xl rounded-2xl"
           >
             <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
@@ -387,7 +387,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
                   placeholder="Your name" 
                   value={formData.full_name}
                   onChange={(e) => setFormData({...formData, full_name: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
                 />
               </div>
               <div className="space-y-2">
@@ -398,7 +398,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
                   placeholder="email@example.com" 
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
                 />
               </div>
               <div className="space-y-2">
@@ -408,7 +408,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
                   placeholder="+1 (555) 000-0000" 
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
                 />
               </div>
               <div className="space-y-2">
@@ -418,7 +418,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
                   placeholder="https://..." 
                   value={formData.website_url}
                   onChange={(e) => setFormData({...formData, website_url: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
                 />
               </div>
               <div className="md:col-span-2 space-y-2">
@@ -428,7 +428,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
                   placeholder="What would you like to discuss with Adam?" 
                   value={formData.topic}
                   onChange={(e) => setFormData({...formData, topic: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors resize-none"
+                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors resize-none"
                 ></textarea>
               </div>
               <div className="md:col-span-2 pt-4">
