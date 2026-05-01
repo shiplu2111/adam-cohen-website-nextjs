@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const AboutSection = () => {
   return (
@@ -16,9 +17,11 @@ const AboutSection = () => {
             className="relative"
           >
             <div className="relative rounded-2xl overflow-hidden gold-glow group">
-              <img
-                src="/gallery/33jpeg"
+              <Image
+                src="/gallery/33.jpeg"
                 alt="Adam Cohen"
+                width={800}
+                height={700}
                 className="w-full h-[500px] lg:h-[700px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
