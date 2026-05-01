@@ -1,6 +1,7 @@
 import PageTransition from "@/components/PageTransition";
 import MagneticButton from "@/components/MagneticButton";
 import { CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
   title: "Professional LinkedIn Management & Growth | Adam Cohen",
@@ -67,6 +68,46 @@ export default function LinkedInPage() {
                 <p className="text-lg font-medium text-foreground/90">{stat.label}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Visual Showcase Section */}
+      <section className="section-padding px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1 relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-square md:aspect-auto">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/linkedin-dashboard.png" 
+                alt="LinkedIn Management Analytics Dashboard Mockup" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="order-1 md:order-2 space-y-6">
+              <h2 className="text-3xl md:text-4xl font-display font-bold">
+                Dominate Your <span className="gold-gradient-text">Industry Feed</span>
+              </h2>
+              <p className="text-lg text-muted-foreground font-light leading-relaxed">
+                A strong LinkedIn presence isn't just about posting updates—it's about algorithm mastery, precise targeting, and converting engagement into high-value relationships. We provide the analytics and strategic execution necessary to measure true growth and ROI.
+              </p>
+              <ul className="space-y-4 pt-4">
+                {[
+                  "Real-time Analytics Dashboard",
+                  "Profile Conversion Optimization",
+                  "Algorithm-driven Content Scheduling",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-foreground/90 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
