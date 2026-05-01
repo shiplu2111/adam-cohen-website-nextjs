@@ -7,7 +7,7 @@ const platforms = [
   { name: "Apple Podcasts", icon: <Mic className="w-5 h-5" />,      href: "#" },
 ];
 
-import { getCmsData } from "@/lib/cms";
+import { getCmsData, getSettings } from "@/lib/cms";
 
 export const metadata = {
   title: "Cohen TV Podcast | Watch & Listen | Adam Cohen",
@@ -15,9 +15,10 @@ export const metadata = {
 };
 
 export default async function CohenTV() {
-  const [podcastsData, cohenTvVideosData] = await Promise.all([
+  const [podcastsData, cohenTvVideosData, settings] = await Promise.all([
     getCmsData("podcasts"),
-    getCmsData("cohen-tv-videos")
+    getCmsData("cohen-tv-videos"),
+    getSettings("site")
   ]);
 
   const liveEpisodes = Array.isArray(podcastsData) && podcastsData.length > 0 
@@ -38,5 +39,5 @@ export default async function CohenTV() {
     ? cohenTvVideosData.filter((v: any) => v.type === 'Podcast' && v.is_published)
     : [];
 
-  return <CohenTVPageClient episodes={liveEpisodes} videoPodcasts={videoPodcasts} platforms={platforms} />;
+  return <CohenTVPageClient episodes={liveEpisodes} videoPodcasts={videoPodcasts} platforms={platforms} settings={settings} />;
 }

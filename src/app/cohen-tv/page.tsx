@@ -1,4 +1,4 @@
-import { getCmsData } from "@/lib/cms";
+import { getCmsData, getSettings } from "@/lib/cms";
 import CohenTvClient, { CohenTvVideo } from "./_components/CohenTvClient";
 import { Metadata } from "next";
 
@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default async function CohenTVPage() {
-  const videoData = await getCmsData("cohen-tv-videos");
+  const [videoData, settings] = await Promise.all([
+    getCmsData("cohen-tv-videos"),
+    getSettings("site")
+  ]);
   
   // Filter only published videos and Cohen TV type
   const publishedVideos = Array.isArray(videoData) 
@@ -18,6 +21,6 @@ export default async function CohenTVPage() {
     : [];
 
   return (
-    <CohenTvClient initialVideos={publishedVideos} />
+    <CohenTvClient initialVideos={publishedVideos} settings={settings} />
   );
 }

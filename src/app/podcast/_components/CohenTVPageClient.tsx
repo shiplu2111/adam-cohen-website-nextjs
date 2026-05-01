@@ -9,6 +9,7 @@ import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 import AudioVisualizer from "@/components/AudioVisualizer";
 import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import {
   MediaController,
   MediaControlBar,
@@ -46,6 +47,9 @@ interface VideoPodcast {
   link: string;
   thumbnail: string | null;
   description?: string;
+  channel?: {
+    logo: string | null;
+  }
 }
 
 interface Platform {
@@ -58,14 +62,25 @@ interface CohenTVPageClientProps {
   episodes: Episode[];
   videoPodcasts: VideoPodcast[];
   platforms: Platform[];
+  settings?: any;
 }
 
-export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }: CohenTVPageClientProps) {
+export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, settings }: CohenTVPageClientProps) {
   const { playTrack, currentTrack, isPlaying: isAudioPlaying, pauseTrack } = useAudioPlayer();
   const [mounted, setMounted] = useState(false);
   const [activeVideo, setActiveVideo] = useState<VideoPodcast | null>(videoPodcasts[0] || null);
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
   const [copied, setCopied] = useState(false);
+  
+  // Form State
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email: "",
+    phone: "",
+    website_url: "",
+    topic: ""
+  });
 
   useEffect(() => {
     setMounted(true);
@@ -98,7 +113,48 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    if (!formData.full_name || !formData.email) {
+      toast.error("Please fill in required fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/public/podcast-register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Application submitted successfully!");
+        setFormData({
+          full_name: "",
+          email: "",
+          phone: "",
+          website_url: "",
+          topic: ""
+        });
+      } else {
+        toast.error(data.message || "Something went wrong.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("Network error. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   if (!mounted) return null;
+
+  const siteLogo = settings?.logo || "/mm.png";
 
   return (
     <PageTransition>
@@ -208,7 +264,16 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                 <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-black/10 dark:border-white/10 mb-8">
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center overflow-hidden">
-                      <img src="/logo.png" alt="Adam Cohen" className="w-10 h-10 object-contain" onError={(e) => e.currentTarget.src = 'https://ui-avatars.com/api/?name=Adam+Cohen&background=D4AF37&color=000'} />
+                      {activeVideo.channel?.logo ? (
+                        <img src={activeVideo.channel.logo || undefined} alt="" className="w-full h-full object-contain" />
+                      ) : (
+                        <img 
+                          src={siteLogo} 
+                          alt="Adam Cohen" 
+                          className="w-12 h-12 object-contain" 
+                          onError={(e) => e.currentTarget.src = 'https://ui-avatars.com/api/?name=Adam+Cohen&background=D4AF37&color=000'} 
+                        />
+                      )}
                     </div>
                     <div>
                       <p className="font-bold text-lg text-black dark:text-white leading-tight">Adam Cohen Today</p>
@@ -313,30 +378,66 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
             transition={{ delay: 0.3 }}
             className="glass-card p-8 md:p-12 border border-white/10 shadow-2xl bg-black/40 backdrop-blur-xl"
           >
-            <form className="grid md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Full Name</label>
-                <input type="text" placeholder="Your name" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Full Name *</label>
+                <input 
+                  type="text" 
+                  required
+                  placeholder="Your name" 
+                  value={formData.full_name}
+                  onChange={(e) => setFormData({...formData, full_name: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Email Address</label>
-                <input type="email" placeholder="email@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Email Address *</label>
+                <input 
+                  type="email" 
+                  required
+                  placeholder="email@example.com" 
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                />
               </div>
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Phone Number</label>
-                <input type="tel" placeholder="+1 (555) 000-0000" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+                <input 
+                  type="tel" 
+                  placeholder="+1 (555) 000-0000" 
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                />
               </div>
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Website / Social Link</label>
-                <input type="url" placeholder="https://..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+                <input 
+                  type="url" 
+                  placeholder="https://..." 
+                  value={formData.website_url}
+                  onChange={(e) => setFormData({...formData, website_url: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" 
+                />
               </div>
               <div className="md:col-span-2 space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Tell us about yourself / your topic</label>
-                <textarea rows={4} placeholder="What would you like to discuss with Adam?" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors resize-none"></textarea>
+                <textarea 
+                  rows={4} 
+                  placeholder="What would you like to discuss with Adam?" 
+                  value={formData.topic}
+                  onChange={(e) => setFormData({...formData, topic: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors resize-none"
+                ></textarea>
               </div>
               <div className="md:col-span-2 pt-4">
-                <button type="button" className="w-full py-5 rounded-xl bg-[#D4AF37] text-black font-bold text-lg flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_30px_rgba(212,175,55,0.2)]">
-                  Submit Application <Send className="w-5 h-5" />
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full py-5 rounded-xl bg-[#D4AF37] text-black font-bold text-lg flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_30px_rgba(212,175,55,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</> : <>Submit Application <Send className="w-5 h-5" /></>}
                 </button>
               </div>
             </form>

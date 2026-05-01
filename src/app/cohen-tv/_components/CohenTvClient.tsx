@@ -46,9 +46,10 @@ export interface CohenTvVideo {
 
 interface CohenTvClientProps {
   initialVideos: CohenTvVideo[];
+  settings?: any;
 }
 
-export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
+export default function CohenTvClient({ initialVideos, settings }: CohenTvClientProps) {
   const [mounted, setMounted] = useState(false);
   const [activeVideo, setActiveVideo] = useState<CohenTvVideo | null>(initialVideos[0] || null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -102,6 +103,9 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
   }
 
   if (!activeVideo) return null;
+
+  // Use the logo from channel, or site settings, or mm.png as the last resort
+  const siteLogo = settings?.logo || "/mm.png";
 
   return (
     <PageTransition>
@@ -170,7 +174,12 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                       {activeVideo.channel?.logo ? (
                         <img src={activeVideo.channel.logo || undefined} alt="" className="w-full h-full object-contain" />
                       ) : (
-                        <img src="/logo.png" alt="Adam Cohen" className="w-full h-full object-contain" onError={(e) => e.currentTarget.src = 'https://ui-avatars.com/api/?name=Adam+Cohen&background=D4AF37&color=000'} />
+                        <img 
+                          src={siteLogo} 
+                          alt="Adam Cohen" 
+                          className="w-full h-full object-contain" 
+                          onError={(e) => e.currentTarget.src = 'https://ui-avatars.com/api/?name=Adam+Cohen&background=D4AF37&color=000'} 
+                        />
                       )}
                     </div>
                     <div>
