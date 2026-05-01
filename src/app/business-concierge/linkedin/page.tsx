@@ -173,6 +173,42 @@ export default function LinkedInPage() {
             </div>
           </div>
 
+          {/* Secondary Visual Showcase Section */}
+          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-display font-bold">
+                Scale Your <span className="gold-gradient-text">Network</span>
+              </h2>
+              <p className="text-lg text-muted-foreground font-light leading-relaxed">
+                Unlock high-ticket opportunities by connecting directly with decision-makers. We facilitate hyper-targeted outbound networking, building relationships that turn into lasting strategic partnerships.
+              </p>
+              <ul className="space-y-4 pt-4">
+                {[
+                  "C-Level Outreach Campaigns",
+                  "Direct Message Strategy & Scripting",
+                  "Inbox Management & Lead Qualification",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-foreground/90 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-square md:aspect-auto">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/linkedin-networking.png" 
+                alt="Professional Networking Connections Mockup" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
+
           <div className="glass-card p-10 md:p-14 relative bg-primary/5">
             <h2 className="text-3xl font-display font-bold mb-6">Who Is This Program For?</h2>
             <p className="text-muted-foreground font-light leading-relaxed mb-6">
