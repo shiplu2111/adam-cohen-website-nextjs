@@ -15,7 +15,11 @@ export const metadata = {
 };
 
 export default async function CohenTV() {
-  const podcastsData = await getCmsData("podcasts");
+  const [podcastsData, cohenTvVideosData] = await Promise.all([
+    getCmsData("podcasts"),
+    getCmsData("cohen-tv-videos")
+  ]);
+
   const liveEpisodes = Array.isArray(podcastsData) && podcastsData.length > 0 
     ? podcastsData.map((p: any) => ({
         id: p.id,
@@ -30,5 +34,9 @@ export default async function CohenTV() {
       }))
     : [];
 
-  return <CohenTVPageClient episodes={liveEpisodes} platforms={platforms} />;
+  const videoPodcasts = Array.isArray(cohenTvVideosData)
+    ? cohenTvVideosData.filter((v: any) => v.type === 'Podcast' && v.is_published)
+    : [];
+
+  return <CohenTVPageClient episodes={liveEpisodes} videoPodcasts={videoPodcasts} platforms={platforms} />;
 }
