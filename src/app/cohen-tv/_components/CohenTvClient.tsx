@@ -20,7 +20,7 @@ import {
 } from "media-chrome/react";
 import { cn } from "@/lib/utils";
 
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }) as any;
 
 export interface CohenTvVideo {
   id: number;

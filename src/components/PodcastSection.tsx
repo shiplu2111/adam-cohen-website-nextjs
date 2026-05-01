@@ -8,7 +8,7 @@ import AudioVisualizer from "./AudioVisualizer";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }) as any;
 
 interface EpisodeProps {
   id?: string;
