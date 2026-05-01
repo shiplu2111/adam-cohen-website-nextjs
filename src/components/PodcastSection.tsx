@@ -45,7 +45,7 @@ const PodcastSection = ({
   }, []);
 
   if (!mounted || !activeEp) return null;
-  
+
   const listEps = [
     ...(featuredEpisode ? [featuredEpisode] : []),
     ...recentEpisodes
@@ -133,7 +133,7 @@ const PodcastSection = ({
               {activeEp.is_video ? (
                 <ReactPlayer
                   key={activeEp.link}
-                  url={activeEp.link}
+                  src={activeEp.link}
                   width="100%"
                   height="100%"
                   controls
