@@ -14,6 +14,7 @@ interface Service {
   description: string;
   image: string;
   features: string[];
+  link?: string;
 }
 
 interface BusinessConciergeClientProps {
@@ -56,16 +57,16 @@ export default function BusinessConciergeClient({ services }: BusinessConciergeC
       <section className="py-8 px-6">
         <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {services.map((svc) => (
-            <a
+            <Link
               key={svc.id}
-              href={`#${svc.id}`}
+              href={svc.link || `#${svc.id}`}
               className="glass-card p-5 flex items-center gap-3 hover:border-primary/40 transition-all duration-300 group"
             >
               <span className="text-primary">{svc.icon}</span>
               <span className="font-display font-semibold text-sm group-hover:text-primary transition-colors">
                 {svc.title}
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
@@ -115,7 +116,7 @@ export default function BusinessConciergeClient({ services }: BusinessConciergeC
                     </li>
                   ))}
                 </ul>
-                <Link href={`/business-concierge/${svc.id}`} className="hero-btn inline-flex items-center gap-2">
+                <Link href={svc.link || `/business-concierge/${svc.id}`} className="hero-btn inline-flex items-center gap-2">
                   Show Details <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>

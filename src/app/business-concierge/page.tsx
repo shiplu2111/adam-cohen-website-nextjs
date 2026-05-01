@@ -1,7 +1,37 @@
 import BusinessConciergeClient from "./_components/BusinessConciergeClient";
-import { Linkedin, Share2, PenTool, Monitor, FileText, Target, TrendingUp, Code2, Smartphone } from "lucide-react";
+import { Linkedin, Share2, PenTool, Monitor, FileText, Target, TrendingUp, Code2, Smartphone, CircleDollarSign, Briefcase, Building2 } from "lucide-react";
 
 const services = [
+  {
+    id: "hard-money",
+    icon: <CircleDollarSign className="w-7 h-7" />,
+    title: "Hard Money",
+    tagline: "Speed & Certainty in Real Estate.",
+    description: "Short-term bridge financing for real estate investors. We provide the capital you need to close deals fast, without the red tape of traditional banks.",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&fit=crop",
+    features: ["Rapid closing times", "Asset-based lending", "Flexible terms", "Competitive rates", "Bridge & fix-flip support"],
+    link: "/real-estate/hard-money"
+  },
+  {
+    id: "private-equity",
+    icon: <Briefcase className="w-7 h-7" />,
+    title: "Private Equity",
+    tagline: "Capital for Growth.",
+    description: "Strategic capital injection for high-growth real estate projects and business ventures. We partner with visionaries to build long-term value.",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop",
+    features: ["Joint venture partnerships", "Direct equity investments", "Portfolio diversification", "Operational expertise", "Long-term growth focus"],
+    link: "/real-estate/private-equity"
+  },
+  {
+    id: "real-estate-investment",
+    icon: <Building2 className="w-7 h-7" />,
+    title: "Real Estate Investment",
+    tagline: "Build Generational Wealth.",
+    description: "Direct access to premium real estate investment opportunities. From multi-family developments to commercial portfolios.",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&fit=crop",
+    features: ["Passive income streams", "Tax-advantaged growth", "Verified track record", "Direct asset ownership", "Market-leading returns"],
+    link: "/real-estate/investment"
+  },
   {
     id: "linkedin",
     icon: <Linkedin className="w-7 h-7" />,
