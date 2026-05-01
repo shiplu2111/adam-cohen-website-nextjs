@@ -5,7 +5,7 @@ const programs = [
   {
     id: "weekly-zoom",
     icon: <Video className="w-8 h-8" />,
-    title: "Weekly Zoom",
+    title: "Business Brainstorm Meetings",
     tagline: "Live Coaching. Real Breakthroughs.",
     description:
       "Every week, join Adam and a curated group of entrepreneurs for a live Zoom session focused on real business problems, live Q&A, hot seat coaching, and accountability. No pre-recorded fluff — just raw, tactical guidance.",
@@ -44,7 +44,7 @@ const programs = [
 
 const testimonials = [
   {
-    quote: "The weekly Zoom alone was worth the entire investment. Adam's real-time feedback saved me from a $200K mistake.",
+    quote: "The Business Brainstorm Meetings alone was worth the entire investment. Adam's real-time feedback saved me from a $200K mistake.",
     name: "Marcus T.",
     title: "Real Estate Investor",
   },

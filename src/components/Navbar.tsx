@@ -32,9 +32,9 @@ const navLinks: NavLink[] = [
     submenu: [
       { label: "LinkedIn", href: "/business-concierge/linkedin" },
       { label: "Social Media Management", href: "/business-concierge/social-media" },
+      { label: "Brand Management", href: "/business-concierge/brand-management" },
       { label: "Web Development", href: "/business-concierge/web-development" },
       { label: "Mobile App Development", href: "/business-concierge/mobile-app-development" },
-      { label: "Brand Management", href: "/business-concierge/brand-management" },
       { label: "Web Design", href: "/business-concierge/web-design" },
       { label: "Content Creation", href: "/business-concierge/content-creation" },
       { label: "Inquiry Landing Page", href: "/business-concierge/inquiry" },
@@ -205,8 +205,8 @@ const Navbar = ({ settings }: { settings?: any }) => {
                                 key={sub.href}
                                 href={sub.href}
                                 className={`px-4 py-2.5 rounded-xl text-sm transition-all duration-200 flex items-center justify-between group/item ${pathname === sub.href
-                                    ? dropdownActive
-                                    : dropdownBase
+                                  ? dropdownActive
+                                  : dropdownBase
                                   }`}
                               >
                                 <span>{sub.label}</span>
@@ -301,8 +301,8 @@ const Navbar = ({ settings }: { settings?: any }) => {
                             key={sub.href}
                             href={sub.href}
                             className={`text-base font-medium transition-colors ${pathname === sub.href
-                                ? mobileLinkActive
-                                : mobileLinkBase
+                              ? mobileLinkActive
+                              : mobileLinkBase
                               }`}
                           >
                             {sub.label}
