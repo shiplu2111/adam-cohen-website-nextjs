@@ -17,7 +17,7 @@ const AboutSection = () => {
           >
             <div className="relative rounded-2xl overflow-hidden gold-glow group">
               <img
-                src="/mm.png"
+                src="/gallery/33jpeg"
                 alt="Adam Cohen"
                 className="w-full h-[500px] lg:h-[700px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
