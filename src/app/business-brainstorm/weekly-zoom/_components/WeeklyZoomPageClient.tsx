@@ -44,6 +44,7 @@ interface WeeklyZoomSettings {
   sessions_per_year?: string;
   active_members?: string;
   minutes_per_session?: string;
+  zoom_link?: string;
 }
 
 interface Expectation {
@@ -168,9 +169,16 @@ export default function WeeklyZoomPageClient({
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}
             className="flex flex-wrap gap-4 mt-10"
           >
-            <a href="#apply" className="hero-btn inline-flex items-center gap-2">
-              Apply to Join <ArrowRight className="w-4 h-4" />
-            </a>
+            {settings?.zoom_link && (
+              <a
+                href={settings.zoom_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-btn inline-flex items-center gap-2"
+              >
+                Apply to Join <ArrowRight className="w-4 h-4" />
+              </a>
+            )}
             <Link href="/business-brainstorm/live-events" className="hero-btn-outline inline-flex items-center gap-2">
               Explore Live Events
             </Link>
@@ -428,8 +436,8 @@ export default function WeeklyZoomPageClient({
 
 
 
-      {/* Apply to Join Form */}
-      <ApplyToJoinForm />
+      {/* Apply to Join Form — hidden; registration handled via zoom_link */}
+      {/* <ApplyToJoinForm /> */}
 
       {/* Final CTA */}
       <section className="section-padding">
@@ -442,9 +450,16 @@ export default function WeeklyZoomPageClient({
             Applications reviewed within 48 hours. If you're accepted, you'll be on the call this week.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#apply" className="hero-btn inline-flex items-center gap-2">
-              Apply Now <ArrowRight className="w-4 h-4" />
-            </a>
+            {settings?.zoom_link && (
+              <a
+                href={settings.zoom_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-btn inline-flex items-center gap-2"
+              >
+                Apply Now <ArrowRight className="w-4 h-4" />
+              </a>
+            )}
             <Link href="/business-brainstorm/live-events" className="hero-btn-outline inline-flex items-center gap-2">
               Explore Live Events
             </Link>
