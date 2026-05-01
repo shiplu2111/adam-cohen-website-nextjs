@@ -271,17 +271,13 @@ export default function ContactPageClient({ contact }: ContactPageClientProps) {
               <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold mb-6 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary" /> Our Location
               </p>
-              <div className="relative w-full rounded-3xl overflow-hidden border border-border/20 shadow-2xl" style={{ height: "420px" }}>
-                <iframe
-                  src={contact.google_maps_url}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Adam Cohen Office Location"
-                  className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
+              <div
+                className="relative w-full rounded-3xl overflow-hidden border border-border/20 shadow-2xl"
+                style={{ height: "420px" }}
+              >
+                <div
+                  dangerouslySetInnerHTML={{ __html: contact.google_maps_url || "" }}
+                  className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:grayscale hover:[&>iframe]:grayscale-0 [&>iframe]:transition-all [&>iframe]:duration-700 [&>iframe]:border-0"
                 />
                 <div className="absolute inset-0 pointer-events-none rounded-3xl ring-1 ring-inset ring-white/5" />
               </div>
