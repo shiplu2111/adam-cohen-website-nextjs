@@ -18,6 +18,7 @@ interface AudioPlayerContextType {
   isPlaying: boolean;
   playTrack: (track: AudioTrack) => void;
   togglePlay: () => void;
+  pauseTrack: () => void;
   closePlayer: () => void;
 }
 
@@ -74,6 +75,13 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
     }
   };
 
+  const pauseTrack = () => {
+    if (audioRef.current && isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
   const closePlayer = () => {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -91,7 +99,7 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
   };
 
   return (
-    <AudioPlayerContext.Provider value={{ currentTrack, isPlaying, playTrack, togglePlay, closePlayer }}>
+    <AudioPlayerContext.Provider value={{ currentTrack, isPlaying, playTrack, togglePlay, pauseTrack, closePlayer }}>
       {children}
       
       {/* audio element is managed imperatively via useRef */}
