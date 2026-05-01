@@ -8,6 +8,7 @@ import {
   ArrowRight, CheckCircle2, Star, Zap
 } from "lucide-react";
 import { ReactNode } from "react";
+import Image from "next/image";
 
 interface Service {
   icon: ReactNode;
@@ -159,53 +160,146 @@ export default function MobileAppPageClient({ services, stats, process }: Mobile
         </div>
       </section>
 
-      {/* Platform highlight */}
-      <section className="py-20 px-6 bg-secondary/30">
+      {/* Feature 1: iOS Development */}
+      <section className="section-padding px-6 bg-secondary/10">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* iOS */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-card p-10 border border-primary/20"
-            >
-              <Apple className="w-10 h-10 text-primary mb-5" />
-              <h3 className="text-2xl font-display font-bold mb-3">iOS Development</h3>
-              <p className="text-muted-foreground mb-6 font-light leading-relaxed">
-                We build stunning native apps for iPhone and iPad using Swift and SwiftUI, fully adhering to Apple's Human Interface Guidelines to ensure App Store approval and high ratings.
-              </p>
-              <ul className="space-y-2">
-                {["Swift & SwiftUI expertise", "App Store optimisation (ASO)", "Apple Watch & iPad support", "In-App Purchases & Subscriptions"].map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                    {f}
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-video md:aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/ma-ios.png" 
+                alt="Premium iOS App Development" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="space-y-6">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-display font-bold flex items-center gap-3"
+              >
+                <Apple className="w-8 h-8 text-primary" /> Premium <span className="gold-gradient-text">iOS Apps</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="text-lg text-muted-foreground font-light leading-relaxed"
+              >
+                We build stunning native apps for iPhone and iPad using Swift and SwiftUI. By strictly adhering to Apple's Human Interface Guidelines, we ensure rapid App Store approval, high user ratings, and frictionless user experiences.
+              </motion.p>
+              <motion.ul 
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="space-y-3 pt-4"
+              >
+                {[
+                  "Swift & SwiftUI Native Development",
+                  "App Store Optimization (ASO) & Launch",
+                  "Apple Watch & iPad Ecosystem Support",
+                  "Secure In-App Purchases & Apple Pay",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                    <span className="text-foreground/90 font-medium">{item}</span>
                   </li>
                 ))}
-              </ul>
-            </motion.div>
+              </motion.ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Android */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-card p-10 border border-primary/20"
-            >
-              <Play className="w-10 h-10 text-primary mb-5" />
-              <h3 className="text-2xl font-display font-bold mb-3">Android Development</h3>
-              <p className="text-muted-foreground mb-6 font-light leading-relaxed">
-                Powerful Android apps built with Kotlin and Jetpack Compose, designed to reach billions of Android users across hundreds of device types with consistent performance.
-              </p>
-              <ul className="space-y-2">
-                {["Kotlin & Jetpack Compose", "Play Store launch strategy", "Multi-device compatibility", "Firebase & Google Cloud integration"].map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                    {f}
+      {/* Feature 2: Android Development */}
+      <section className="section-padding px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="order-2 md:order-1 space-y-6">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-display font-bold flex items-center gap-3"
+              >
+                <Play className="w-8 h-8 text-primary" /> Powerful <span className="gold-gradient-text">Android Apps</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="text-lg text-muted-foreground font-light leading-relaxed"
+              >
+                Reach billions of users worldwide with high-performance Android applications. Built with Kotlin and Jetpack Compose, our Android solutions deliver consistent, crash-free performance across hundreds of different device types.
+              </motion.p>
+              <motion.ul 
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="space-y-3 pt-4"
+              >
+                {[
+                  "Kotlin & Jetpack Compose Architecture",
+                  "Material Design 3 Implementation",
+                  "Multi-device & Tablet Compatibility",
+                  "Google Play Console Launch Strategy",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                    <span className="text-foreground/90 font-medium">{item}</span>
                   </li>
                 ))}
-              </ul>
-            </motion.div>
+              </motion.ul>
+            </div>
+            <div className="order-1 md:order-2 relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-video md:aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/ma-android.png" 
+                alt="Premium Android App UI Mockup" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature 3: Cross Platform */}
+      <section className="section-padding px-6 bg-secondary/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 group aspect-video md:aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Image 
+                src="/images/services/ma-cross-platform.png" 
+                alt="Cross-Platform App Development Architecture" 
+                width={800} 
+                height={800} 
+                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="space-y-6">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-display font-bold flex items-center gap-3"
+              >
+                <Smartphone className="w-8 h-8 text-primary" /> Cross-Platform <span className="gold-gradient-text">Efficiency</span>
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="text-lg text-muted-foreground font-light leading-relaxed"
+              >
+                Maximize your budget and time-to-market. We build powerful cross-platform apps using React Native, giving you a single, maintainable codebase that deploys near-native performance simultaneously to both iOS and Android.
+              </motion.p>
+              <motion.ul 
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="space-y-3 pt-4"
+              >
+                {[
+                  "React Native & Expo Frameworks",
+                  "Single Codebase for iOS & Android",
+                  "Near-Native Rendering Performance",
+                  "Rapid Prototyping & MVP Deployment",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                    <span className="text-foreground/90 font-medium">{item}</span>
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
           </div>
         </div>
       </section>
