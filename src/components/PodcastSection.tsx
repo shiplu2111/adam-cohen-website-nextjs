@@ -119,7 +119,7 @@ const PodcastSection = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className={`lg:col-span-3 group rounded-2xl overflow-hidden relative transition-all duration-500 ${currentTrack?.id === (activeEp.id || activeEp.number) ? 'ring-2 ring-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.15)]' : 'border border-[#D4AF37]/18'}`}
+            className={`lg:col-span-3 group rounded-2xl overflow-hidden relative transition-all duration-500 transform-gpu isolate ${currentTrack?.id === (activeEp.id || activeEp.number) ? 'ring-2 ring-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.15)]' : 'border border-[#D4AF37]/18'}`}
             style={{
               background: "linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(255,255,255,0.02) 100%)",
             }}
@@ -132,6 +132,7 @@ const PodcastSection = ({
                   width="100%"
                   height="100%"
                   controls
+                  style={{ pointerEvents: 'auto' }}
                 />
               ) : (
                 <div className={`px-8 pt-8 pb-4 flex items-end gap-1 h-full transition-opacity duration-500 ${currentTrack?.id === (activeEp.id || activeEp.number) ? 'opacity-100' : 'opacity-20'}`}>

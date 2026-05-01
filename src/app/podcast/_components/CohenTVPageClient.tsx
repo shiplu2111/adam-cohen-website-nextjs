@@ -171,8 +171,8 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Main Video Player */}
               <div className="flex-1 lg:max-w-[70%]">
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black mb-6 shadow-2xl border border-white/5">
-                  <MediaController className="w-full h-full absolute inset-0">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black mb-6 shadow-2xl border border-white/5 isolate transform-gpu">
+                  <MediaController className="w-full h-full absolute inset-0 overscroll-none" autohide={2}>
                     <ReactPlayer
                       key={activeVideo.link}
                       src={activeVideo.link}
@@ -186,6 +186,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                       }}
                       onPause={() => setIsPlayingVideo(false)}
                       slot="media"
+                      style={{ pointerEvents: 'auto' }}
                     />
                     <MediaControlBar slot="control-bar" className="w-full">
                       <MediaPlayButton />
