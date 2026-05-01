@@ -66,7 +66,7 @@ export default function ContactPageClient({ contact }: ContactPageClientProps) {
     },
     contact.office_hours && {
       icon: <Clock className="w-6 h-6" />,
-      label: "Office Hours",
+      label: "Office Hours (Pacific Time)",
       value: contact.office_hours,
       href: undefined,
     },
@@ -74,10 +74,10 @@ export default function ContactPageClient({ contact }: ContactPageClientProps) {
 
   // Build social links — only show items that have a URL
   const socialLinks = [
-    contact.linkedin_url  && { icon: <Linkedin  className="w-6 h-6" />, label: "LinkedIn",  href: contact.linkedin_url },
+    contact.linkedin_url && { icon: <Linkedin className="w-6 h-6" />, label: "LinkedIn", href: contact.linkedin_url },
     contact.instagram_url && { icon: <Instagram className="w-6 h-6" />, label: "Instagram", href: contact.instagram_url },
-    contact.youtube_url   && { icon: <Youtube   className="w-6 h-6" />, label: "YouTube",   href: contact.youtube_url },
-    contact.twitter_url   && { icon: <Twitter   className="w-6 h-6" />, label: "Twitter/X", href: contact.twitter_url },
+    contact.youtube_url && { icon: <Youtube className="w-6 h-6" />, label: "YouTube", href: contact.youtube_url },
+    contact.twitter_url && { icon: <Twitter className="w-6 h-6" />, label: "Twitter/X", href: contact.twitter_url },
   ].filter(Boolean) as { icon: React.ReactNode; label: string; href: string }[];
 
   return (
