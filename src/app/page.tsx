@@ -65,7 +65,8 @@ export default async function Home() {
       description: p.description || "",
       image: p.thumbnail,
       location: p.location,
-      metric: p.metric
+      metric: p.metric,
+      live_url: p.live_url
     }))
     : [];
 
@@ -100,7 +101,7 @@ export default async function Home() {
       <StatsSection stats={stats} />
       <AboutSection />
       <ServicesSection services={services} />
-      <ProjectsSection projects={projects} />
+      <ProjectsSection projects={projects.slice(0, 6)} />
       <PodcastSection featuredEpisode={liveEpisodes[0]} recentEpisodes={liveEpisodes.slice(1)} />
       <TestimonialsSection testimonials={testimonials} />
       <NewsletterSection />

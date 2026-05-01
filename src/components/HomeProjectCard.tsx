@@ -13,11 +13,13 @@ interface HomeProjectCardProps {
     category: string;
     description: string;
     image: string;
+    live_url?: string;
   };
   index: number;
+  onClick?: () => void;
 }
 
-const HomeProjectCard = ({ project, index }: HomeProjectCardProps) => {
+const HomeProjectCard = ({ project, index, onClick }: HomeProjectCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -25,6 +27,7 @@ const HomeProjectCard = ({ project, index }: HomeProjectCardProps) => {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.65, delay: index * 0.08 }}
       whileHover={{ y: -6 }}
+      onClick={onClick}
       className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] transition-all duration-500 flex flex-col h-full bg-[#111111]"
     >
       {/* Photo */}
@@ -61,14 +64,19 @@ const HomeProjectCard = ({ project, index }: HomeProjectCardProps) => {
           {project.description}
         </p>
 
-        <div className="pt-4">
-          <Link 
-            href={`/portfolio`} 
-            className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#D4AF37] hover:text-white transition-colors duration-300"
-          >
-            Learn More <ArrowUpRight className="h-3 w-3" />
-          </Link>
-        </div>
+        {project.live_url && (
+          <div className="pt-4">
+            <a 
+              href={project.live_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#D4AF37] hover:text-white transition-colors duration-300"
+            >
+              Live Preview <ArrowUpRight className="h-3 w-3" />
+            </a>
+          </div>
+        )}
       </div>
     </motion.div>
   );

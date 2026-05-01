@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default async function CohenTVPage() {
   const videoData = await getCmsData("cohen-tv-videos");
   
-  // Filter only published videos
+  // Filter only published videos and Cohen TV type
   const publishedVideos = Array.isArray(videoData) 
-    ? videoData.filter((v: CohenTvVideo) => v.is_published)
+    ? videoData.filter((v: CohenTvVideo) => v.is_published && (v.type === 'Cohen TV' || !v.type))
     : [];
 
   return (

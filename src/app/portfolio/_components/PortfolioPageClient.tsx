@@ -97,6 +97,18 @@ export default function PortfolioPageClient({
     return () => observer.disconnect();
   }, [loading, meta]);
 
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProject]);
+
   return (
     <PageTransition>
       <div className="bg-background overflow-x-hidden">
@@ -346,7 +358,7 @@ export default function PortfolioPageClient({
                         rel="noopener noreferrer"
                         className="hero-btn w-full inline-flex items-center justify-center gap-3 py-5 text-lg"
                       >
-                        Visit Live Project <ExternalLink className="h-5 w-5" />
+                        Visit Live Preview <ExternalLink className="h-5 w-5" />
                       </a>
                     </div>
                   )}

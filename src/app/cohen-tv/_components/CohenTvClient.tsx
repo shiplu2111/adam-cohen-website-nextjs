@@ -30,6 +30,7 @@ export interface CohenTvVideo {
   duration: string | null;
   date: string | null;
   link: string;
+  type?: string;
   order: number;
   is_published: boolean;
   thumbnail: string | null;

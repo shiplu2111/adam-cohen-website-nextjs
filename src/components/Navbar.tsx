@@ -21,7 +21,7 @@ const navLinks: NavLink[] = [
     label: "Real Estate",
     href: "/real-estate",
     submenu: [
-      { label: "Hard Money",     href: "/real-estate/hard-money" },
+      { label: "Hard Money", href: "/real-estate/hard-money" },
       { label: "Private Equity", href: "/real-estate/private-equity" },
       { label: "Real Estate Investment", href: "/real-estate/investment" },
     ],
@@ -30,25 +30,25 @@ const navLinks: NavLink[] = [
     label: "Business Concierge",
     href: "/business-concierge",
     submenu: [
-      { label: "LinkedIn",                href: "/business-concierge/linkedin" },
+      { label: "LinkedIn", href: "/business-concierge/linkedin" },
       { label: "Social Media Management", href: "/business-concierge/social-media" },
-      { label: "Web Development",         href: "/business-concierge/web-development" },
-      { label: "Mobile App Development",  href: "/business-concierge/mobile-app-development" },
-      { label: "Brand Management",        href: "/business-concierge/brand-management" },
-      { label: "Web Design",              href: "/business-concierge/web-design" },
-      { label: "Content Creation",        href: "/business-concierge/content-creation" },
-      { label: "Inquiry Landing Page",    href: "/business-concierge/inquiry" },
-      { label: "Affiliate Marketing",     href: "/business-concierge/affiliate" },
+      { label: "Web Development", href: "/business-concierge/web-development" },
+      { label: "Mobile App Development", href: "/business-concierge/mobile-app-development" },
+      { label: "Brand Management", href: "/business-concierge/brand-management" },
+      { label: "Web Design", href: "/business-concierge/web-design" },
+      { label: "Content Creation", href: "/business-concierge/content-creation" },
+      { label: "Inquiry Landing Page", href: "/business-concierge/inquiry" },
+      { label: "Affiliate Marketing", href: "/business-concierge/affiliate" },
     ],
   },
   {
     label: "Business Brainstorm",
     href: "/business-brainstorm",
     submenu: [
-      { label: "Weekly Zoom", href: "/business-brainstorm/weekly-zoom" },
-      { label: "Live Events",  href: "/business-brainstorm/live-events" },
-      { label: "Cohen TV",     href: "/cohen-tv" },
-      { label: "Podcast",      href: "/podcast" },
+      { label: "Business Brainstorm Meetings", href: "/business-brainstorm/weekly-zoom" },
+      { label: "Live Events", href: "/business-brainstorm/live-events" },
+      { label: "Cohen TV", href: "/cohen-tv" },
+      { label: "Podcast", href: "/podcast" },
     ],
   },
   { label: "Contact", href: "/contact" },
@@ -62,9 +62,9 @@ const isActive = (link: NavLink, pathname: string) => {
 };
 
 const Navbar = ({ settings }: { settings?: any }) => {
-  const [scrolled, setScrolled]             = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [mobileOpen, setMobileOpen]         = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const { theme, mounted } = useTheme();
@@ -91,23 +91,23 @@ const Navbar = ({ settings }: { settings?: any }) => {
   // Both modes: solid dark navbar — fully visible against any hero background
   const navBgStyle: React.CSSProperties = isLight
     ? {
-        backgroundColor: scrolled ? "rgba(11,11,11,0.98)" : "rgba(11,11,11,0.94)",
-        backdropFilter: "blur(20px)",
-        borderBottom: scrolled ? "1px solid rgba(212,175,55,0.12)" : "1px solid transparent",
-        boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.2)" : "none",
-      }
+      backgroundColor: scrolled ? "rgba(11,11,11,0.98)" : "rgba(11,11,11,0.94)",
+      backdropFilter: "blur(20px)",
+      borderBottom: scrolled ? "1px solid rgba(212,175,55,0.12)" : "1px solid transparent",
+      boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.2)" : "none",
+    }
     : {
-        backgroundColor: scrolled ? "rgba(8,10,18,0.97)" : "rgba(8,10,18,0.80)",
-        backdropFilter: "blur(20px)",
-        borderBottom: scrolled ? "1px solid rgba(212,175,55,0.12)" : "1px solid rgba(255,255,255,0.05)",
-        boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.4)" : "none",
-      };
+      backgroundColor: scrolled ? "rgba(8,10,18,0.97)" : "rgba(8,10,18,0.80)",
+      backdropFilter: "blur(20px)",
+      borderBottom: scrolled ? "1px solid rgba(212,175,55,0.12)" : "1px solid rgba(255,255,255,0.05)",
+      boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.4)" : "none",
+    };
   const navBgClass = "";
 
   // Nav link colours
-  const logoSecondary    = "text-white/60";
-  const linkBase         = "text-white/75 hover:text-[#D4AF37]";
-  const linkActiveClass  = "text-[#D4AF37]";
+  const logoSecondary = "text-white/60";
+  const linkBase = "text-white/75 hover:text-[#D4AF37]";
+  const linkActiveClass = "text-[#D4AF37]";
 
   // Dropdown — always solid dark panel so it's readable on any background
   const dropdownPanelStyle: React.CSSProperties = {
@@ -116,21 +116,21 @@ const Navbar = ({ settings }: { settings?: any }) => {
     boxShadow: "0 20px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03)",
     backdropFilter: "blur(20px)",
   };
-  const dropdownBase   = "text-white/70 hover:text-[#D4AF37] hover:bg-white/5";
+  const dropdownBase = "text-white/70 hover:text-[#D4AF37] hover:bg-white/5";
   const dropdownActive = "text-[#D4AF37] bg-[#D4AF37]/10";
 
   // Mobile menu
-  const hamburger      = "bg-white";
+  const hamburger = "bg-white";
   const mobileBgStyle: React.CSSProperties = {
     backgroundColor: "rgba(8,8,8,0.99)",
     backdropFilter: "blur(24px)",
   };
-  const mobileBgClass    = "";
-  const mobileLinkBase   = "text-white/80 hover:text-[#D4AF37]";
+  const mobileBgClass = "";
+  const mobileLinkBase = "text-white/80 hover:text-[#D4AF37]";
   const mobileLinkActive = "text-[#D4AF37]";
-  const mobileSubLabel   = "text-white/35";
-  const mobileBorderL    = "border-[#D4AF37]/20";
-  const mobileDivider    = "border-white/10";
+  const mobileSubLabel = "text-white/35";
+  const mobileBorderL = "border-[#D4AF37]/20";
+  const mobileDivider = "border-white/10";
   // ──────────────────────────────────────────────────────────────────────────
 
   return (
@@ -164,30 +164,26 @@ const Navbar = ({ settings }: { settings?: any }) => {
                   {link.href ? (
                     <Link
                       href={link.href}
-                      className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 whitespace-nowrap ${
-                        active ? linkActiveClass : linkBase
-                      }`}
+                      className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 whitespace-nowrap ${active ? linkActiveClass : linkBase
+                        }`}
                     >
                       {link.label}
                       {link.submenu && (
                         <ChevronDown
-                          className={`w-3 h-3 transition-transform duration-300 ${
-                            activeDropdown === link.label ? "rotate-180" : ""
-                          }`}
+                          className={`w-3 h-3 transition-transform duration-300 ${activeDropdown === link.label ? "rotate-180" : ""
+                            }`}
                         />
                       )}
                     </Link>
                   ) : (
                     <button
-                      className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 whitespace-nowrap ${
-                        activeDropdown === link.label ? linkActiveClass : linkBase
-                      }`}
+                      className={`flex items-center gap-1 text-sm tracking-wide transition-colors duration-300 whitespace-nowrap ${activeDropdown === link.label ? linkActiveClass : linkBase
+                        }`}
                     >
                       {link.label}
                       <ChevronDown
-                        className={`w-3 h-3 transition-transform duration-300 ${
-                          activeDropdown === link.label ? "rotate-180" : ""
-                        }`}
+                        className={`w-3 h-3 transition-transform duration-300 ${activeDropdown === link.label ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
                   )}
@@ -208,11 +204,10 @@ const Navbar = ({ settings }: { settings?: any }) => {
                               <Link
                                 key={sub.href}
                                 href={sub.href}
-                                className={`px-4 py-2.5 rounded-xl text-sm transition-all duration-200 flex items-center justify-between group/item ${
-                                  pathname === sub.href
+                                className={`px-4 py-2.5 rounded-xl text-sm transition-all duration-200 flex items-center justify-between group/item ${pathname === sub.href
                                     ? dropdownActive
                                     : dropdownBase
-                                }`}
+                                  }`}
                               >
                                 <span>{sub.label}</span>
                                 <motion.span
@@ -290,9 +285,8 @@ const Navbar = ({ settings }: { settings?: any }) => {
                       {link.href ? (
                         <Link
                           href={link.href}
-                          className={`text-2xl font-display font-bold transition-colors ${
-                            isActive(link, pathname) ? mobileLinkActive : mobileLinkBase
-                          }`}
+                          className={`text-2xl font-display font-bold transition-colors ${isActive(link, pathname) ? mobileLinkActive : mobileLinkBase
+                            }`}
                         >
                           {link.label}
                         </Link>
@@ -306,11 +300,10 @@ const Navbar = ({ settings }: { settings?: any }) => {
                           <Link
                             key={sub.href}
                             href={sub.href}
-                            className={`text-base font-medium transition-colors ${
-                              pathname === sub.href
+                            className={`text-base font-medium transition-colors ${pathname === sub.href
                                 ? mobileLinkActive
                                 : mobileLinkBase
-                            }`}
+                              }`}
                           >
                             {sub.label}
                           </Link>
@@ -320,9 +313,8 @@ const Navbar = ({ settings }: { settings?: any }) => {
                   ) : (
                     <Link
                       href={link.href!}
-                      className={`text-2xl font-display font-bold transition-colors ${
-                        isActive(link, pathname) ? mobileLinkActive : mobileLinkBase
-                      }`}
+                      className={`text-2xl font-display font-bold transition-colors ${isActive(link, pathname) ? mobileLinkActive : mobileLinkBase
+                        }`}
                     >
                       {link.label}
                     </Link>

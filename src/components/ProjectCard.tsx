@@ -91,7 +91,7 @@ const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-black text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300"
               >
-                Learn More
+                Live Preview
               </a>
             </motion.div>
           )}
