@@ -270,7 +270,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                         </div>
                       </div>
                       <div className="flex flex-col justify-center overflow-hidden">
-                        <h4 className="text-sm font-bold text-white line-clamp-2 leading-tight group-hover:text-[#D4AF37] transition-colors mb-1">
+                        <h4 className="text-sm text-black  font-bold text-white line-clamp-2 leading-tight group-hover:text-[#D4AF37] transition-colors mb-1">
                           {video.title}
                         </h4>
                         <p className="text-[10px] text-white/40 uppercase tracking-wider font-mono">{video.duration || "VIDEO"}</p>

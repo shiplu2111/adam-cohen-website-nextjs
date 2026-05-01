@@ -105,7 +105,7 @@ const PodcastSection = ({
                 color: "white",
               }}
             >
-              <Youtube className="w-5 h-5 text-[#D4AF37]" />
+              <Youtube className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
               YouTube
             </a>
             <Link
@@ -116,7 +116,7 @@ const PodcastSection = ({
                 color: "black",
               }}
             >
-              <UserPlus className="w-5 h-5" />
+              <UserPlus className="w-5 h-5 flex-shrink-0" />
               Podcast with Adam
             </Link>
           </motion.div>

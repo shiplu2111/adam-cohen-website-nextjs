@@ -105,13 +105,13 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
 
   return (
     <PageTransition>
-      <section className="pt-24 pb-20 px-4 md:px-6 min-h-screen bg-background">
+      <section className="pt-24 pb-20 px-4 md:px-6 min-h-screen bg-white dark:bg-background transition-colors">
         <div className="max-w-[1600px] mx-auto mt-4">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
             {/* LEFT COLUMN: Main Video & Details */}
             <div className="flex-1 lg:max-w-[60%] xl:max-w-[63%]">
               <div className="flex flex-col">
-                <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black mb-4 shadow-xl border border-white/5 flex flex-col justify-end">
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black mb-4 shadow-xl border border-black/5 dark:border-white/5 flex flex-col justify-end">
                   <MediaController className="w-full h-full absolute inset-0">
                     <ReactPlayer
                       key={activeVideo.link}
@@ -144,29 +144,29 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                       href="https://youtube.com/@adamcohentoday"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-white/10 text-sm font-semibold transition-all duration-300 hover:bg-white/10"
-                      style={{ color: "white" }}
+                      className="flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-black/10 dark:border-white/10 text-sm font-semibold transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/10"
+                      style={{ color: "var(--foreground)" }}
                     >
-                      <Youtube className="w-5 h-5 text-[#D4AF37]" />
-                      YouTube
+                      <Youtube className="w-5 h-5 text-[#D4AF37] flex-shrink-0" />
+                      <span className="text-black dark:text-white">YouTube</span>
                     </a>
                     <Link
                       href="/podcast#registration-form"
                       className="flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#D4AF37] text-black text-sm font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
                     >
-                      <UserPlus className="w-5 h-5" />
-                      Podcast with Adam
+                      <UserPlus className="w-5 h-5 flex-shrink-0" />
+                      <span>Podcast with Adam</span>
                     </Link>
                   </div>
                 </div>
 
-                <h1 className="text-xl md:text-2xl font-bold mb-3 text-foreground line-clamp-2">
+                <h1 className="text-xl md:text-2xl font-bold mb-3 text-black dark:text-white line-clamp-2 transition-colors">
                   {activeVideo.title}
                 </h1>
 
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-secondary border border-black/10 dark:border-border flex items-center justify-center overflow-hidden flex-shrink-0">
                       {activeVideo.channel?.logo ? (
                         <img src={activeVideo.channel.logo || undefined} alt="" className="w-full h-full object-contain" />
                       ) : (
@@ -174,16 +174,16 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                       )}
                     </div>
                     <div>
-                      <p className="font-bold text-foreground text-[15px] leading-snug">
+                      <p className="font-bold text-black dark:text-white text-[15px] leading-snug transition-colors">
                         {activeVideo.channel?.name || "Adam Cohen Today"}
                       </p>
-                      <p className="text-xs text-muted-foreground">{activeVideo.channel?.subscribers || "7+ subscribers"}</p>
+                      <p className="text-xs text-black/50 dark:text-muted-foreground transition-colors">{activeVideo.channel?.subscribers || "7+ subscribers"}</p>
                     </div>
                     <a
                       href={activeVideo.channel?.url || "https://youtube.com/@adamcohentoday?sub_confirmation=1"}
                       target="_blank"
                       rel="noreferrer"
-                      className="ml-4 bg-foreground text-background font-bold py-1.5 px-4 rounded-full text-sm hover:bg-foreground/80 transition-colors inline-block"
+                      className="ml-4 bg-black dark:bg-foreground text-white dark:text-background font-bold py-1.5 px-4 rounded-full text-sm hover:opacity-80 transition-all inline-block"
                     >
                       Subscribe
                     </a>
@@ -192,17 +192,17 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                   <div className="flex items-center gap-2">
                     <button 
                       onClick={handleShare}
-                      className="flex items-center gap-2 bg-secondary/50 hover:bg-secondary/80 text-foreground text-sm font-medium py-2 px-4 rounded-full transition-colors"
+                      className="flex items-center gap-2 bg-black/5 dark:bg-secondary/50 hover:bg-black/10 dark:hover:bg-secondary/80 text-black dark:text-white text-sm font-medium py-2 px-4 rounded-full transition-colors border border-black/5 dark:border-none"
                     >
                       <Share2 className="w-4 h-4" /> Share
                     </button>
                     <button 
                       onClick={handleCopy}
                       className={cn(
-                        "flex items-center gap-2 text-sm font-medium py-2 px-4 rounded-full transition-all duration-300",
+                        "flex items-center gap-2 text-sm font-medium py-2 px-4 rounded-full transition-all duration-300 border",
                         copied 
-                          ? "bg-green-500/20 text-green-500 border border-green-500/30" 
-                          : "bg-secondary/50 hover:bg-secondary/80 text-foreground"
+                          ? "bg-green-500/10 dark:bg-green-500/20 text-green-500 border-green-500/30" 
+                          : "bg-black/5 dark:bg-secondary/50 hover:bg-black/10 dark:hover:bg-secondary/80 text-black dark:text-white border-black/5 dark:border-none"
                       )}
                     >
                       {copied ? (
@@ -223,7 +223,7 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
             {/* RIGHT COLUMN: Up Next */}
             <div className="flex-1 lg:max-w-[30%] xl:max-w-[27%] flex flex-col gap-3">
               <div className="hidden lg:flex items-center gap-2 mb-2 px-2">
-                <span className="bg-foreground text-background text-sm font-medium py-1 px-3 rounded-lg">Up Next</span>
+                <span className="bg-black dark:bg-foreground text-white dark:text-background text-sm font-medium py-1 px-3 rounded-lg">Up Next</span>
               </div>
 
               {upNextEpisodes.map((ep) => (
@@ -234,14 +234,14 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                     setIsPlaying(true);
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className="flex gap-2.5 cursor-pointer group rounded-lg transition-colors p-2 hover:bg-secondary/20"
+                  className="flex gap-2.5 cursor-pointer group rounded-lg transition-colors p-2 hover:bg-black/5 dark:hover:bg-secondary/20"
                 >
-                  <div className="relative w-[160px] min-w-[160px] aspect-video rounded-lg overflow-hidden bg-secondary/30 border border-white/5 flex-shrink-0 flex items-center justify-center">
+                  <div className="relative w-[160px] min-w-[160px] aspect-video rounded-lg overflow-hidden bg-black/5 dark:bg-secondary/30 border border-black/5 dark:border-white/5 flex-shrink-0 flex items-center justify-center">
                     {ep.thumbnail ? (
                       <img src={ep.thumbnail || undefined} alt="" className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full bg-black/40 flex items-center justify-center">
-                        <Play className="w-6 h-6 text-white/50" />
+                      <div className="w-full h-full bg-black/10 dark:bg-black/40 flex items-center justify-center">
+                        <Play className="w-6 h-6 text-black/20 dark:text-white/50" />
                       </div>
                     )}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity duration-300">
@@ -253,13 +253,13 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                   </div>
 
                   <div className="flex flex-col py-0.5 pr-2">
-                    <h4 className="text-sm font-bold text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
+                    <h4 className="text-sm font-bold text-black dark:text-white line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
                       {ep.title}
                     </h4>
-                    <p className="text-[12px] text-muted-foreground line-clamp-1">
+                    <p className="text-[12px] text-black/50 dark:text-muted-foreground line-clamp-1 transition-colors">
                       {ep.host}
                     </p>
-                    <div className="flex items-center gap-1 text-[12px] text-muted-foreground mt-0.5">
+                    <div className="flex items-center gap-1 text-[12px] text-black/40 dark:text-muted-foreground mt-0.5 transition-colors">
                       <span>{ep.date ? String(ep.date).split('T')[0] : ""}</span>
                     </div>
                   </div>
@@ -270,8 +270,8 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
 
           {/* More Videos Grid */}
           {moreEpisodes.length > 0 && (
-            <div className="mt-8 pt-8 border-t border-white/10">
-              <h3 className="text-xl font-bold text-foreground mb-6">More From {activeVideo.channel?.name || activeVideo.host}</h3>
+            <div className="mt-8 pt-8 border-t border-black/10 dark:border-white/10">
+              <h3 className="text-xl font-bold text-black dark:text-white mb-6 transition-colors">More From {activeVideo.channel?.name || activeVideo.host}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-6">
                 {moreEpisodes.map((ep) => (
                   <div
@@ -283,12 +283,12 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                     }}
                     className="flex flex-col gap-2.5 cursor-pointer group rounded-lg"
                   >
-                    <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-secondary/30 border border-white/5 flex items-center justify-center">
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black/5 dark:bg-secondary/30 border border-black/5 dark:border-white/5 flex items-center justify-center">
                       {ep.thumbnail ? (
                         <img src={ep.thumbnail || undefined} alt="" className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full bg-black/40 flex items-center justify-center">
-                          <Play className="w-8 h-8 text-white/50" />
+                        <div className="w-full h-full bg-black/10 dark:bg-black/40 flex items-center justify-center">
+                          <Play className="w-8 h-8 text-black/20 dark:text-white/50" />
                         </div>
                       )}
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity duration-300">
@@ -299,13 +299,13 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                       </div>
                     </div>
                     <div className="flex flex-col pr-2">
-                      <h4 className="text-[15px] font-bold text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
+                      <h4 className="text-[15px] font-bold text-black dark:text-white line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
                         {ep.title}
                       </h4>
-                      <p className="text-[13px] text-muted-foreground line-clamp-1">
+                      <p className="text-[13px] text-black/50 dark:text-muted-foreground line-clamp-1 transition-colors">
                         {ep.host}
                       </p>
-                      <div className="flex items-center gap-1 text-[13px] text-muted-foreground mt-0.5">
+                      <div className="flex items-center gap-1 text-[13px] text-black/40 dark:text-muted-foreground mt-0.5 transition-colors">
                         <span>{ep.date ? String(ep.date).split('T')[0] : ""}</span>
                       </div>
                     </div>
