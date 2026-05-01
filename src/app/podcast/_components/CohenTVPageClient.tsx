@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import PageTransition from "@/components/PageTransition";
-import { Play, Mic, Youtube, Headphones, ArrowRight, Loader2, Share2, Copy, Check, Calendar, MonitorPlay } from "lucide-react";
+import { Play, Mic, Youtube, ArrowRight, Loader2, Share2, Copy, Check, MonitorPlay, UserPlus, Send } from "lucide-react";
 import { ReactNode, useState, useEffect } from "react";
 import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 import AudioVisualizer from "@/components/AudioVisualizer";
@@ -144,22 +144,28 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
             className="flex flex-wrap gap-4 mt-10"
           >
-            {platforms.map((p) => (
-              <a
-                key={p.name}
-                href={p.href}
-                className="flex items-center gap-2.5 px-5 py-3 rounded-full border border-[#D4AF37]/30 text-sm font-medium transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10"
-                style={{ color: "rgba(255,255,255,0.8)" }}
-              >
-                <span className="text-[#D4AF37]">{p.icon}</span>
-                {p.name}
-              </a>
-            ))}
+            <a
+              href="https://youtube.com/@adamcohentoday"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-[#D4AF37]/30 text-sm font-semibold transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/10"
+              style={{ color: "white" }}
+            >
+              <Youtube className="w-5 h-5 text-[#D4AF37]" />
+              YouTube
+            </a>
+            <button
+              onClick={() => document.getElementById('registration-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#D4AF37] text-black text-sm font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+            >
+              <UserPlus className="w-5 h-5" />
+              Podcast with Adam
+            </button>
           </motion.div>
         </div>
       </section>
 
-      {/* Video Podcast Section (Design like cohen-tv) */}
+      {/* Video Podcast Section */}
       {videoPodcasts.length > 0 && activeVideo && (
         <section className="py-20 px-4 md:px-6 bg-background">
           <div className="max-w-7xl mx-auto">
@@ -177,7 +183,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                       playing={isPlayingVideo}
                       onPlay={() => {
                         setIsPlayingVideo(true);
-                        pauseTrack(); // Pause audio if video plays
+                        pauseTrack();
                       }}
                       onPause={() => setIsPlayingVideo(false)}
                       slot="media"
@@ -195,28 +201,42 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                     </MediaControlBar>
                   </MediaController>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">{activeVideo.title}</h2>
-                <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-t border-white/10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center overflow-hidden">
-                      <span className="font-bold text-[#D4AF37]">{activeVideo.host?.charAt(0) || "A"}</span>
+
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">{activeVideo.title}</h2>
+
+                {/* Channel & Subscribe Info (Mirroring Screenshot) */}
+                <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-white/10 mb-8">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                      <img src="/logo.png" alt="Adam Cohen" className="w-10 h-10 object-contain" onError={(e) => e.currentTarget.src = 'https://ui-avatars.com/api/?name=Adam+Cohen&background=D4AF37&color=000'} />
                     </div>
                     <div>
-                      <p className="font-bold text-white">{activeVideo.host || "Adam Cohen"}</p>
-                      <p className="text-xs text-white/50">{activeVideo.date ? String(activeVideo.date).split('T')[0] : "Recent Episode"}</p>
+                      <p className="font-bold text-lg text-white leading-tight">Adam Cohen Today</p>
+                      <p className="text-xs text-white/40">7+ subscriber</p>
                     </div>
+                    <a
+                      href="https://youtube.com/@adamcohentoday?sub_confirmation=1"
+                      target="_blank"
+                      className="ml-4 px-6 py-2.5 rounded-full bg-white text-black font-bold text-sm transition-transform hover:scale-105 active:scale-95"
+                    >
+                      Subscribe
+                    </a>
                   </div>
+
                   <div className="flex items-center gap-3">
-                    <button onClick={handleShare} className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium py-2 px-6 rounded-full transition-colors border border-white/10">
+                    <button onClick={handleShare} className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium py-2.5 px-6 rounded-full transition-colors border border-white/10">
                       <Share2 className="w-4 h-4" /> Share
                     </button>
-                    <button onClick={handleCopy} className={cn("flex items-center gap-2 text-sm font-medium py-2 px-6 rounded-full transition-all border", copied ? "bg-green-500/10 text-green-500 border-green-500/30" : "bg-white/5 hover:bg-white/10 text-white border-white/10")}>
+                    <button onClick={handleCopy} className={cn("flex items-center gap-2 text-sm font-medium py-2.5 px-6 rounded-full transition-all border", copied ? "bg-green-500/10 text-green-500 border-green-500/30" : "bg-white/5 hover:bg-white/10 text-white border-white/10")}>
                       {copied ? <><Check className="w-4 h-4" /> Copied</> : <><Copy className="w-4 h-4" /> Copy Link</>}
                     </button>
                   </div>
                 </div>
+
                 {activeVideo.description && (
-                  <p className="mt-6 text-white/60 font-light leading-relaxed">{activeVideo.description}</p>
+                  <div className="bg-white/5 rounded-2xl p-6 border border-white/5">
+                    <p className="text-white/80 font-light leading-relaxed whitespace-pre-line">{activeVideo.description}</p>
+                  </div>
                 )}
               </div>
 
@@ -225,7 +245,7 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                 <h3 className="text-lg font-bold text-[#D4AF37] mb-2 flex items-center gap-2">
                   <MonitorPlay className="w-5 h-5" /> More Video Episodes
                 </h3>
-                <div className="flex flex-col gap-4 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
+                <div className="flex flex-col gap-3 max-h-[800px] overflow-y-auto pr-2 custom-scrollbar">
                   {videoPodcasts.filter(v => v.id !== activeVideo.id).map(video => (
                     <div
                       key={video.id}
@@ -233,10 +253,11 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                         setActiveVideo(video);
                         setIsPlayingVideo(true);
                         pauseTrack();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
-                      className="flex gap-3 group cursor-pointer p-2 rounded-xl hover:bg-white/5 transition-colors"
+                      className="flex gap-3 group cursor-pointer p-3 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-transparent hover:border-white/10"
                     >
-                      <div className="relative w-32 aspect-video rounded-lg overflow-hidden flex-shrink-0 bg-white/5">
+                      <div className="relative w-36 aspect-video rounded-xl overflow-hidden flex-shrink-0 bg-black/40">
                         {video.thumbnail ? (
                           <img src={video.thumbnail} alt="" className="w-full h-full object-cover" />
                         ) : (
@@ -244,15 +265,15 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
                             <Play className="w-4 h-4 text-white/50" />
                           </div>
                         )}
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity">
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
                           <Play className="w-6 h-6 text-white fill-current" />
                         </div>
                       </div>
-                      <div className="flex flex-col justify-center">
-                        <h4 className="text-sm font-bold text-white line-clamp-2 leading-tight group-hover:text-[#D4AF37] transition-colors">
+                      <div className="flex flex-col justify-center overflow-hidden">
+                        <h4 className="text-sm font-bold text-white line-clamp-2 leading-tight group-hover:text-[#D4AF37] transition-colors mb-1">
                           {video.title}
                         </h4>
-                        <p className="text-[10px] text-white/40 mt-1 uppercase tracking-wider">{video.duration}</p>
+                        <p className="text-[10px] text-white/40 uppercase tracking-wider font-mono">{video.duration || "VIDEO"}</p>
                       </div>
                     </div>
                   ))}
@@ -263,73 +284,77 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms }
         </section>
       )}
 
-      {/* Audio Episodes List (Optional, can be kept or simplified) */}
-      <section className="py-20 px-6 border-t border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl font-display font-bold text-white mb-2">Audio <span className="gold-gradient-text">Conversations</span></h2>
-            <p className="text-white/40 font-light">Stream our raw audio episodes on the go.</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {episodes.map((ep, i) => (
-              <motion.div
-                key={ep.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className={`glass-card p-6 group cursor-pointer transition-all duration-500 ${currentTrack?.id === (ep.id || ep.number) ? 'border-primary ring-1 ring-primary/20' : 'hover:border-primary/30 border-white/10'}`}
-                onClick={() => {
-                  if (ep.link) {
-                    setIsPlayingVideo(false);
-                    playTrack({
-                      id: ep.id || ep.number,
-                      title: ep.title,
-                      host: ep.host || "Adam Cohen",
-                      link: ep.link,
-                      thumbnail: ep.thumbnail
-                    });
-                  }
-                }}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-bold tracking-[0.2em] font-mono text-primary/60">EP.{ep.number}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">{ep.tag}</span>
-                    <span className="text-xs text-white/30">{ep.duration}</span>
-                  </div>
-                </div>
-                <h3 className={`text-lg font-bold mb-2 transition-colors ${currentTrack?.id === (ep.id || ep.number) ? 'text-primary' : 'group-hover:text-primary'}`}>{ep.title}</h3>
-                <p className="text-sm text-white/40 line-clamp-2 font-light">{ep.description}</p>
+      {/* Registration Form Section */}
+      <section id="registration-form" className="py-24 px-6 relative overflow-hidden bg-black/40">
+        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #D4AF37, transparent 70%)' }} />
 
-                <div className="mt-4 flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentTrack?.id === (ep.id || ep.number) ? 'bg-primary text-black' : 'bg-primary/10 text-primary'}`}>
-                    {currentTrack?.id === (ep.id || ep.number) && isAudioPlaying ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
-                  </div>
-                  {currentTrack?.id === (ep.id || ep.number) && isAudioPlaying && <AudioVisualizer isPlaying={isAudioPlaying} count={8} />}
-                </div>
-              </motion.div>
-            ))}
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="w-16 h-16 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center mx-auto mb-6">
+              <UserPlus className="w-8 h-8 text-[#D4AF37]" />
+            </motion.div>
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl font-display font-bold mb-6">
+              Podcast with <span className="gold-gradient-text">Adam Cohen</span>
+            </motion.h2>
+            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-white/60 max-w-xl mx-auto font-light">
+              Ready to share your story or expertise? Apply now to be a guest on the Cohen TV Podcast and reach a global audience of high-performers.
+            </motion.p>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="glass-card p-8 md:p-12 border border-white/10 shadow-2xl"
+          >
+            <form className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Full Name</label>
+                <input type="text" placeholder="Your name" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Email Address</label>
+                <input type="email" placeholder="email@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Phone Number</label>
+                <input type="tel" placeholder="+1 (555) 000-0000" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Website / Social Link</label>
+                <input type="url" placeholder="https://..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+              </div>
+              <div className="md:col-span-2 space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Tell us about yourself / your topic</label>
+                <textarea rows={4} placeholder="What would you like to discuss with Adam?" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors resize-none"></textarea>
+              </div>
+              <div className="md:col-span-2 pt-4">
+                <button type="button" className="w-full py-5 rounded-xl bg-[#D4AF37] text-black font-bold text-lg flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                  Submit Application <Send className="w-5 h-5" />
+                </button>
+              </div>
+            </form>
+          </motion.div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-padding">
+      {/* CTA Section */}
+      <section className="section-padding border-t border-white/5">
         <div className="max-w-4xl mx-auto text-center glass-card p-12 md:p-20 border border-primary/20">
           <Mic className="w-10 h-10 text-primary mx-auto mb-6" />
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
             Never Miss an <span className="gold-gradient-text">Episode</span>
           </h2>
           <p className="text-muted-foreground mb-10 max-w-xl mx-auto font-light">
-            Subscribe on your platform of choice and get new episodes delivered every week.
+            Subscribe on YouTube to get raw conversations on business and wealth delivered every week.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#" className="hero-btn inline-flex items-center gap-2 px-8">
-              <Youtube className="w-4 h-4" /> Watch on YouTube
+            <a href="https://youtube.com/@adamcohentoday" target="_blank" className="hero-btn inline-flex items-center gap-2 px-10">
+              <Youtube className="w-5 h-5" /> Subscribe on YouTube
             </a>
-            <Link href="/contact" className="hero-btn-outline inline-flex items-center gap-2 px-8">
-              Suggest a Topic <ArrowRight className="w-4 h-4" />
+            <Link href="/contact" className="hero-btn-outline inline-flex items-center gap-2 px-10">
+              Contact Us <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Play, Headphones, Youtube, ArrowRight, Clock, Loader2, Pause } from "lucide-react";
+import { Play, Youtube, ArrowRight, Clock, Loader2, Pause, UserPlus } from "lucide-react";
 import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 import AudioVisualizer from "./AudioVisualizer";
 import dynamic from "next/dynamic";
@@ -22,12 +22,6 @@ interface EpisodeProps {
   thumbnail?: string;
   is_video?: boolean;
 }
-
-const platforms = [
-  { name: "YouTube", icon: <Youtube className="w-4 h-4" />, href: "#" },
-  { name: "Spotify", icon: <Headphones className="w-4 h-4" />, href: "#" },
-  { name: "Apple Podcasts", icon: <Play className="w-4 h-4" />, href: "#" },
-];
 
 const PodcastSection = ({
   featuredEpisode,
@@ -100,21 +94,31 @@ const PodcastSection = ({
             transition={{ delay: 0.3 }}
             className="flex flex-wrap gap-3"
           >
-            {platforms.map((p) => (
-              <a
-                key={p.name}
-                href={p.href}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-300 hover:scale-105"
-                style={{
-                  backgroundColor: "rgba(212,175,55,0.08)",
-                  border: "1px solid rgba(212,175,55,0.2)",
-                  color: "rgba(255,255,255,0.75)",
-                }}
-              >
-                <span style={{ color: "#D4AF37" }}>{p.icon}</span>
-                {p.name}
-              </a>
-            ))}
+            <a
+              href="https://youtube.com/@adamcohentoday"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold tracking-wide transition-all duration-300 hover:scale-105"
+              style={{
+                backgroundColor: "rgba(212,175,55,0.08)",
+                border: "1px solid rgba(212,175,55,0.2)",
+                color: "white",
+              }}
+            >
+              <Youtube className="w-5 h-5 text-[#D4AF37]" />
+              YouTube
+            </a>
+            <Link
+              href="/podcast#registration-form"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold tracking-wide transition-all duration-300 hover:scale-105"
+              style={{
+                backgroundColor: "#D4AF37",
+                color: "black",
+              }}
+            >
+              <UserPlus className="w-5 h-5" />
+              Podcast with Adam
+            </Link>
           </motion.div>
         </div>
 
@@ -212,7 +216,7 @@ const PodcastSection = ({
                       thumbnail: ep.thumbnail
                     });
                   } else {
-                    pauseTrack(); // Pause audio if switching to video
+                    pauseTrack();
                   }
                 }}
                 className={`group flex items-center gap-4 p-5 rounded-xl cursor-pointer transition-all duration-300 border ${currentTrack?.id === (ep.id || ep.number) || activeEp.id === ep.id ? 'border-[#D4AF37] bg-[#D4AF37]/10 shadow-[0_0_20px_rgba(212,175,55,0.1)]' : 'bg-white/5 border-white/10'} hover:border-[#D4AF37]/30 hover:bg-[#D4AF37]/5`}

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
-import { Play, Calendar, MonitorPlay, Share2, ThumbsUp, Plus, Loader2, Copy, Check } from "lucide-react";
+import { Play, Calendar, MonitorPlay, Share2, ThumbsUp, Plus, Loader2, Copy, Check, Youtube, UserPlus } from "lucide-react";
 import {
   MediaController,
   MediaControlBar,
@@ -19,6 +19,7 @@ import {
   MediaFullscreenButton,
 } from "media-chrome/react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }) as any;
 
@@ -137,6 +138,28 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                   </MediaController>
                 </div>
 
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="https://youtube.com/@adamcohentoday"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 px-6 py-2.5 rounded-full border border-white/10 text-sm font-semibold transition-all duration-300 hover:bg-white/10"
+                      style={{ color: "white" }}
+                    >
+                      <Youtube className="w-5 h-5 text-[#D4AF37]" />
+                      YouTube
+                    </a>
+                    <Link
+                      href="/podcast#registration-form"
+                      className="flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#D4AF37] text-black text-sm font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                    >
+                      <UserPlus className="w-5 h-5" />
+                      Podcast with Adam
+                    </Link>
+                  </div>
+                </div>
+
                 <h1 className="text-xl md:text-2xl font-bold mb-3 text-foreground line-clamp-2">
                   {activeVideo.title}
                 </h1>
@@ -147,20 +170,20 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                       {activeVideo.channel?.logo ? (
                         <img src={activeVideo.channel.logo || undefined} alt="" className="w-full h-full object-contain" />
                       ) : (
-                        <div className="font-bold text-lg">{activeVideo.host?.charAt(0) || "A"}</div>
+                        <img src="/logo.png" alt="Adam Cohen" className="w-full h-full object-contain" onError={(e) => e.currentTarget.src = 'https://ui-avatars.com/api/?name=Adam+Cohen&background=D4AF37&color=000'} />
                       )}
                     </div>
                     <div>
                       <p className="font-bold text-foreground text-[15px] leading-snug">
-                        {activeVideo.channel?.name || activeVideo.host}
+                        {activeVideo.channel?.name || "Adam Cohen Today"}
                       </p>
-                      <p className="text-xs text-muted-foreground">{activeVideo.channel?.subscribers || "1.2M subscribers"}</p>
+                      <p className="text-xs text-muted-foreground">{activeVideo.channel?.subscribers || "7+ subscribers"}</p>
                     </div>
                     <a
-                      href={activeVideo.channel?.url || "#"}
+                      href={activeVideo.channel?.url || "https://youtube.com/@adamcohentoday?sub_confirmation=1"}
                       target="_blank"
                       rel="noreferrer"
-                      className="ml-4 bg-foreground text-background font-medium py-1.5 px-4 rounded-full text-sm hover:bg-foreground/80 transition-colors inline-block"
+                      className="ml-4 bg-foreground text-background font-bold py-1.5 px-4 rounded-full text-sm hover:bg-foreground/80 transition-colors inline-block"
                     >
                       Subscribe
                     </a>
@@ -211,7 +234,7 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                     setIsPlaying(true);
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className="flex gap-2.5 cursor-pointer group rounded-lg transition-colors p-1 hover:bg-secondary/20"
+                  className="flex gap-2.5 cursor-pointer group rounded-lg transition-colors p-2 hover:bg-secondary/20"
                 >
                   <div className="relative w-[160px] min-w-[160px] aspect-video rounded-lg overflow-hidden bg-secondary/30 border border-white/5 flex-shrink-0 flex items-center justify-center">
                     {ep.thumbnail ? (
@@ -230,7 +253,7 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                   </div>
 
                   <div className="flex flex-col py-0.5 pr-2">
-                    <h4 className="text-sm font-medium text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
+                    <h4 className="text-sm font-bold text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
                       {ep.title}
                     </h4>
                     <p className="text-[12px] text-muted-foreground line-clamp-1">
@@ -276,7 +299,7 @@ export default function CohenTvClient({ initialVideos }: CohenTvClientProps) {
                       </div>
                     </div>
                     <div className="flex flex-col pr-2">
-                      <h4 className="text-[15px] font-semibold text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
+                      <h4 className="text-[15px] font-bold text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors mb-1">
                         {ep.title}
                       </h4>
                       <p className="text-[13px] text-muted-foreground line-clamp-1">
