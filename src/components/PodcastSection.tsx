@@ -6,9 +6,9 @@ import { Play, Headphones, Youtube, ArrowRight, Clock, Loader2, Pause } from "lu
 import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 import AudioVisualizer from "./AudioVisualizer";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }) as any;
 
 interface EpisodeProps {
   id?: string;
@@ -37,11 +37,19 @@ const PodcastSection = ({
   recentEpisodes?: EpisodeProps[];
 }) => {
   const { playTrack, currentTrack, isPlaying: isAudioPlaying, pauseTrack } = useAudioPlayer();
-  const [activeVideo, setActiveVideo] = useState<EpisodeProps | null>(null);
+  const [activeEp, setActiveEp] = useState<EpisodeProps | null>(featuredEpisode || recentEpisodes[0] || null);
+  const [mounted, setMounted] = useState(false);
 
-  if (!featuredEpisode && (!recentEpisodes || recentEpisodes.length === 0)) return null;
-  const mainEp = featuredEpisode || recentEpisodes[0];
-  const listEps = (featuredEpisode ? recentEpisodes : recentEpisodes.slice(1)) || [];
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !activeEp) return null;
+  
+  const listEps = [
+    ...(featuredEpisode ? [featuredEpisode] : []),
+    ...recentEpisodes
+  ].filter(ep => ep.id !== activeEp.id);
 
   return (
     <section
@@ -116,28 +124,23 @@ const PodcastSection = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className={`lg:col-span-3 group cursor-pointer rounded-2xl overflow-hidden relative transition-all duration-500 ${currentTrack?.id === (mainEp.id || mainEp.number) ? 'ring-2 ring-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.15)]' : 'border border-[#D4AF37]/18'}`}
+            className={`lg:col-span-3 group rounded-2xl overflow-hidden relative transition-all duration-500 ${currentTrack?.id === (activeEp.id || activeEp.number) ? 'ring-2 ring-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.15)]' : 'border border-[#D4AF37]/18'}`}
             style={{
               background: "linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(255,255,255,0.02) 100%)",
             }}
           >
             <div className={`relative aspect-video w-full rounded-t-2xl overflow-hidden bg-black/40`}>
-              {mainEp.is_video ? (
+              {activeEp.is_video ? (
                 <ReactPlayer
-                  src={mainEp.link}
+                  key={activeEp.link}
+                  url={activeEp.link}
                   width="100%"
                   height="100%"
                   controls
-                  light={mainEp.thumbnail}
-                  playIcon={
-                    <div className="h-16 w-16 rounded-full bg-primary/20 backdrop-blur-md border border-primary/50 flex items-center justify-center">
-                      <Play className="h-6 w-6 text-primary fill-primary" />
-                    </div>
-                  }
                 />
               ) : (
-                <div className={`px-8 pt-8 pb-4 flex items-end gap-1 h-full transition-opacity duration-500 ${currentTrack?.id === (mainEp.id || mainEp.number) ? 'opacity-100' : 'opacity-20'}`}>
-                  {currentTrack?.id === (mainEp.id || mainEp.number) ? (
+                <div className={`px-8 pt-8 pb-4 flex items-end gap-1 h-full transition-opacity duration-500 ${currentTrack?.id === (activeEp.id || activeEp.number) ? 'opacity-100' : 'opacity-20'}`}>
+                  {currentTrack?.id === (activeEp.id || activeEp.number) ? (
                     <AudioVisualizer isPlaying={isAudioPlaying} count={30} />
                   ) : (
                     [40, 65, 30, 80, 55, 90, 40, 70, 35, 85, 60, 75, 45, 90, 50, 70, 40, 80, 55, 65].map((h, i) => (
@@ -150,36 +153,36 @@ const PodcastSection = ({
             <div className="p-8 pt-2">
               <div className="flex items-center gap-3 mb-5">
                 <span className="text-xs font-bold tracking-[0.2em] uppercase px-3 py-1.5 rounded-full" style={{ backgroundColor: "rgba(212,175,55,0.1)", color: "#D4AF37", border: "1px solid rgba(212,175,55,0.2)" }}>
-                  {mainEp.tag}
+                  {activeEp.tag}
                 </span>
-                <span className="text-xs flex items-center gap-1.5" style={{ color: "rgba(255,255,255,0.4)" }}><Clock className="w-3 h-3" />{mainEp.duration}</span>
-                <span className="text-xs font-mono font-bold" style={{ color: "rgba(212,175,55,0.5)" }}>EP.{mainEp.number}</span>
+                <span className="text-xs flex items-center gap-1.5" style={{ color: "rgba(255,255,255,0.4)" }}><Clock className="w-3 h-3" />{activeEp.duration}</span>
+                <span className="text-xs font-mono font-bold" style={{ color: "rgba(212,175,55,0.5)" }}>EP.{activeEp.number}</span>
               </div>
               <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white leading-tight group-hover:text-[#D4AF37] transition-colors duration-300">
-                {mainEp.title}
+                {activeEp.title}
               </h3>
-              <p className="font-light leading-relaxed mb-8 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>{mainEp.description}</p>
+              <p className="font-light leading-relaxed mb-8 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>{activeEp.description}</p>
               <div className="flex items-center gap-4">
-                {!mainEp.is_video && (
+                {!activeEp.is_video && (
                   <button
-                    onClick={() => mainEp.link && playTrack({
-                      id: mainEp.id || mainEp.number,
-                      title: mainEp.title,
-                      host: mainEp.host || "Adam Cohen",
-                      link: mainEp.link,
-                      thumbnail: mainEp.thumbnail
+                    onClick={() => activeEp.link && playTrack({
+                      id: activeEp.id || activeEp.number,
+                      title: activeEp.title,
+                      host: activeEp.host || "Adam Cohen",
+                      link: activeEp.link,
+                      thumbnail: activeEp.thumbnail
                     })}
                     className="flex items-center gap-3 px-6 py-3.5 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)]" style={{ background: "linear-gradient(135deg, #D4AF37, #C19B2E)", color: "#0B0B0B" }}>
-                    {currentTrack?.id === (mainEp.id || mainEp.number) && isAudioPlaying ? (
+                    {currentTrack?.id === (activeEp.id || activeEp.number) && isAudioPlaying ? (
                       <><Pause className="w-4 h-4 fill-current" /> Pause</>
                     ) : (
-                      <><Play className="w-4 h-4 fill-current" /> {currentTrack?.id === (mainEp.id || mainEp.number) ? 'Resume' : 'Play Episode'}</>
+                      <><Play className="w-4 h-4 fill-current" /> {currentTrack?.id === (activeEp.id || activeEp.number) ? 'Resume' : 'Play Episode'}</>
                     )}
                   </button>
                 )}
-                {mainEp.is_video && (
-                  <div className="flex items-center gap-2 text-[#D4AF37] font-bold text-xs uppercase tracking-widest">
-                    <Play className="h-4 w-4 fill-primary" /> Video Episode
+                {activeEp.is_video && (
+                  <div className="flex items-center gap-2 text-[#D4AF37] font-bold text-xs uppercase tracking-widest bg-[#D4AF37]/10 px-4 py-2 rounded-lg border border-[#D4AF37]/20">
+                    <Play className="h-4 w-4 fill-primary" /> Watching Video
                   </div>
                 )}
                 <Link href="/podcast" className="text-sm font-semibold flex items-center gap-1.5 transition-colors duration-300 hover:text-[#D4AF37]" style={{ color: "rgba(255,255,255,0.5)" }}>
@@ -198,18 +201,24 @@ const PodcastSection = ({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ x: 4 }}
-                onClick={() => ep.link && playTrack({
-                  id: ep.id || ep.number,
-                  title: ep.title,
-                  host: ep.host || "Adam Cohen",
-                  link: ep.link,
-                  thumbnail: ep.thumbnail
-                })}
-                className={`group flex items-center gap-4 p-5 rounded-xl cursor-pointer transition-all duration-300 border ${currentTrack?.id === (ep.id || ep.number) ? 'border-[#D4AF37] bg-[#D4AF37]/10 shadow-[0_0_20px_rgba(212,175,55,0.1)]' : 'bg-white/5 border-white/10'} hover:border-[#D4AF37]/30 hover:bg-[#D4AF37]/5`}
+                onClick={() => {
+                  setActiveEp(ep);
+                  if (!ep.is_video && ep.link) {
+                    playTrack({
+                      id: ep.id || ep.number,
+                      title: ep.title,
+                      host: ep.host || "Adam Cohen",
+                      link: ep.link,
+                      thumbnail: ep.thumbnail
+                    });
+                  } else {
+                    pauseTrack(); // Pause audio if switching to video
+                  }
+                }}
+                className={`group flex items-center gap-4 p-5 rounded-xl cursor-pointer transition-all duration-300 border ${currentTrack?.id === (ep.id || ep.number) || activeEp.id === ep.id ? 'border-[#D4AF37] bg-[#D4AF37]/10 shadow-[0_0_20px_rgba(212,175,55,0.1)]' : 'bg-white/5 border-white/10'} hover:border-[#D4AF37]/30 hover:bg-[#D4AF37]/5`}
               >
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${currentTrack?.id === (ep.id || ep.number) ? 'bg-[#D4AF37] text-black' : 'bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37]'}`}>
-                  {currentTrack?.id === (ep.id || ep.number) && isPlaying ? (
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${currentTrack?.id === (ep.id || ep.number) || activeEp.id === ep.id ? 'bg-[#D4AF37] text-black' : 'bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37]'}`}>
+                  {(currentTrack?.id === (ep.id || ep.number) && isAudioPlaying) || (activeEp.id === ep.id && activeEp.is_video) ? (
                     <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 1 }} className="h-5 w-5 bg-black rounded-full flex items-center justify-center">
                       <div className="h-2 w-2 rounded-full bg-white animate-pulse" />
                     </motion.div>
