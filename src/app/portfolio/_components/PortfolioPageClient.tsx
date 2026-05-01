@@ -6,7 +6,8 @@ import PageTransition from "@/components/PageTransition";
 import MagneticButton from "@/components/MagneticButton";
 import ProjectCard from "@/components/ProjectCard";
 import { getCmsData } from "@/lib/cms";
-import { Loader2 } from "lucide-react";
+import { Loader2, X, MapPin, BarChart3, Calendar, Briefcase, ExternalLink } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 interface Project {
   id: string;
@@ -16,6 +17,9 @@ interface Project {
   category: string;
   description: string;
   thumbnail: string;
+  client?: string;
+  date?: string;
+  live_url?: string;
 }
 
 interface CaseStudy {
@@ -50,6 +54,7 @@ export default function PortfolioPageClient({
   const [projects, setProjects] = useState<any[]>(initialProjects);
   const [meta, setMeta] = useState(initialMeta);
   const [loading, setLoading] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   const fetchMore = async () => {
@@ -139,6 +144,7 @@ export default function PortfolioPageClient({
                     image: project.thumbnail,
                   }} 
                   index={i % 12} 
+                  onClick={() => setSelectedProject(project)}
                 />
               ))}
             </div>
@@ -261,6 +267,94 @@ export default function PortfolioPageClient({
             </motion.div>
           </div>
         </section>
+
+        {/* Project Detail Modal */}
+        <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
+          <DialogContent className="max-w-4xl p-0 overflow-hidden bg-[#0B0B0B] border-white/10 rounded-[2rem]">
+            {selectedProject && (
+              <div className="flex flex-col lg:flex-row h-full max-h-[90vh] overflow-y-auto lg:overflow-hidden">
+                {/* Left: Image */}
+                <div className="lg:w-1/2 h-[300px] lg:h-auto relative">
+                  <img 
+                    src={selectedProject.thumbnail} 
+                    alt={selectedProject.title} 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-transparent" />
+                  <button 
+                    onClick={() => setSelectedProject(null)}
+                    className="absolute top-6 left-6 p-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white lg:hidden"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                {/* Right: Content */}
+                <div className="lg:w-1/2 p-8 md:p-12 flex flex-col gap-8 lg:overflow-y-auto">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="px-4 py-1.5 rounded-xl bg-primary/10 border border-primary/20 text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
+                        {selectedProject.category}
+                      </span>
+                      <button 
+                        onClick={() => setSelectedProject(null)}
+                        className="hidden lg:block p-2 rounded-full hover:bg-white/5 text-white/40 hover:text-white transition-colors"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">
+                      {selectedProject.title}
+                    </h2>
+                    <div className="flex flex-wrap gap-4 text-sm text-white/40">
+                      <div className="flex items-center gap-1.5">
+                        <MapPin className="h-4 w-4 text-primary" /> {selectedProject.location}
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="h-4 w-4 text-primary" /> {selectedProject.date ? new Date(selectedProject.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'Recent'}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 border-y border-white/5 py-8">
+                    <div className="space-y-1">
+                      <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">Key Metric</p>
+                      <p className="text-2xl font-display font-bold text-primary flex items-center gap-2">
+                        <BarChart3 className="h-5 w-5" /> {selectedProject.metric}
+                      </p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">Client</p>
+                      <p className="text-xl font-display font-bold text-white flex items-center gap-2">
+                        <Briefcase className="h-5 w-5 text-primary" /> {selectedProject.client || 'Private Client'}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">The Engagement</p>
+                    <p className="text-lg text-white/70 font-light leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  {selectedProject.live_url && (
+                    <div className="pt-4 mt-auto">
+                      <a 
+                        href={selectedProject.live_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hero-btn w-full inline-flex items-center justify-center gap-3 py-5 text-lg"
+                      >
+                        Visit Live Project <ExternalLink className="h-5 w-5" />
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </PageTransition>
   );

@@ -11,17 +11,20 @@ interface ProjectCardProps {
     category: string;
     description: string;
     image: string;
+    live_url?: string;
   };
   index: number;
+  onClick?: () => void;
 }
 
-const ProjectCard = ({ project, index }: ProjectCardProps) => {
+const ProjectCard = ({ project, index, onClick }: ProjectCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: index * 0.1 }}
+      onClick={onClick}
       className="group relative rounded-[2.5rem] overflow-hidden cursor-pointer aspect-[4/5] md:aspect-[3/4] bg-[#0B0B0B] border border-white/5 h-full"
     >
       {/* Background Image */}
@@ -74,6 +77,24 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           <p className="text-sm md:text-base text-white/60 leading-relaxed font-light line-clamp-3 group-hover:text-white/80 transition-colors duration-500 max-w-md">
             {project.description}
           </p>
+
+          {project.live_url && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="pt-2"
+            >
+              <a
+                href={project.live_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-black text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300"
+              >
+                Learn More
+              </a>
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
