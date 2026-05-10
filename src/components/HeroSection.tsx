@@ -56,16 +56,16 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
               {(typeof slide.bg !== 'string' || !slide.bg.startsWith('bg-')) && (
                 <>
                   {/* Desktop Background */}
-                  <img 
-                    src={(typeof slide.bg === 'string' ? (slide.bg || null) : (slide.bg ? (slide.bg as any).src : null)) as any} 
-                    alt="" 
-                    className="hidden md:block w-full h-full object-cover opacity-40 mix-blend-overlay" 
+                  <img
+                    src={(typeof slide.bg === 'string' ? (slide.bg || null) : (slide.bg ? (slide.bg as any).src : null)) as any}
+                    alt=""
+                    className="hidden md:block w-full h-full object-cover opacity-50 mix-blend-overlay"
                   />
                   {/* Mobile Background (Portrait Image) */}
-                  <img 
-                    src={(typeof (slide.portrait || slide.bg) === 'string' ? (slide.portrait || slide.bg) : ((slide.portrait || slide.bg) ? (slide.portrait || slide.bg as any).src : null)) as any} 
-                    alt="" 
-                    className="md:hidden w-full h-full object-cover opacity-40 mix-blend-overlay" 
+                  <img
+                    src={(typeof (slide.portrait || slide.bg) === 'string' ? (slide.portrait || slide.bg) : ((slide.portrait || slide.bg) ? (slide.portrait || slide.bg as any).src : null)) as any}
+                    alt=""
+                    className="md:hidden w-full h-full object-cover opacity-65 mix-blend-overlay"
                   />
                 </>
               )}
@@ -98,10 +98,10 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                               {slide.title3}
                             </span>
                           </h1>
-                          <p className="text-sm md:text-base font-black text-white tracking-tighter uppercase max-w-[320px] mx-auto md:max-w-none md:mx-0">
+                          <p className="text-sm md:text-base font-black text-white tracking-tighter uppercase max-w-[240px] mx-auto md:max-w-md md:mx-0">
                             {slide.title4}
                           </p>
-                          <h1 className="text-3xl md:text-4xl lg:text-5xl leading-none font-black italic marketing-red-gradient text-stroke-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] uppercase">
+                          <h1 className="text-3xl md:text-4xl lg:text-5xl leading-none font-black italic marketing-red-gradient text-stroke-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] uppercase max-w-[300px] mx-auto md:max-w-2xl md:mx-0">
                             {slide.location}
                           </h1>
                           <p className="text-lg md:text-xl font-black text-white tracking-tighter uppercase mb-4">
@@ -118,7 +118,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                           <div className="bg-white text-black inline-block px-3 py-1 text-xl md:text-2xl font-black uppercase">
                             {slide.title3}
                           </div>
-                          <p className="text-lg md:text-xl font-black text-[#fbbf24] tracking-tighter uppercase mb-4 max-w-[320px] mx-auto md:max-w-none md:mx-0">
+                          <p className="text-lg md:text-xl font-black text-[#fbbf24] tracking-tighter uppercase mb-4 max-w-[240px] mx-auto md:max-w-md md:mx-0">
                             {slide.title4}
                           </p>
                         </>
@@ -149,10 +149,10 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                               ADAM COHEN
                             </div>
                           </div>
-                          <p className="text-base md:text-lg font-bold text-white italic uppercase max-w-[320px] mx-auto md:max-w-none md:mx-0">
+                          <p className="text-base md:text-lg font-bold text-white italic uppercase max-w-[240px] mx-auto md:max-w-md md:mx-0">
                             {slide.title3}
                           </p>
-                          <div className="text-xl md:text-2xl font-black text-[#fbbf24] mb-4 uppercase">
+                          <div className="text-xl md:text-2xl font-black text-[#fbbf24] mb-4 uppercase max-w-[300px] mx-auto md:max-w-2xl md:mx-0">
                             {slide.title4}
                           </div>
                         </>
