@@ -179,7 +179,7 @@ export default function WeeklyZoomPageClient({
                 Apply to Join <ArrowRight className="w-4 h-4" />
               </a>
             )}
-            <Link href="/business-brainstorm/live-events" className="hero-btn-outline inline-flex items-center gap-2">
+            <Link href="/live-events" className="hero-btn-outline inline-flex items-center gap-2">
               Explore Live Events
             </Link>
           </motion.div>
@@ -460,7 +460,7 @@ export default function WeeklyZoomPageClient({
                 Apply Now <ArrowRight className="w-4 h-4" />
               </a>
             )}
-            <Link href="/business-brainstorm/live-events" className="hero-btn-outline inline-flex items-center gap-2">
+            <Link href="/live-events" className="hero-btn-outline inline-flex items-center gap-2">
               Explore Live Events
             </Link>
           </div>

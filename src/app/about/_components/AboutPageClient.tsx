@@ -77,10 +77,8 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
                 </h1>
                 <div className="space-y-6 text-xl text-muted-foreground leading-relaxed font-light max-w-2xl">
                   <p>
-                    A UK-born entrepreneur with 35+ years of business experience. From launching his first company at 16 in London to becoming a leading real estate investor in the US, Adam brings unmatched expertise in investment, finance, and brand building.
-
+                    Adam S. Cohen is a highly accomplished entrepreneur who has built a distinguished career defined by consistent business achievements and a reputation for resolute, visionary leadership.
                   </p>
-
                 </div>
               </motion.div>
               <motion.div
@@ -97,6 +95,94 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
             </div>
           </div>
         </section>
+
+        {/* Official Bio Section */}
+        <section className="section-padding px-6 bg-secondary/10">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-12 gap-16">
+              <div className="lg:col-span-8 space-y-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-medium">The Professional Journey</p>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">Engineering a <span className="gold-gradient-text">Legacy</span></h2>
+                  
+                  <div className="space-y-6 text-lg md:text-xl text-muted-foreground font-light leading-relaxed">
+                    <p>
+                      Mr. Cohen's journey began remarkably early; at just 16 years old, he displayed a precocious instinct for emerging markets by founding one of London's first cellular telephone retailers. This early venture served as the foundation for a trajectory that has seen him achieve world-class results across two sectors: telecommunications and real estate.
+                    </p>
+                    <p>
+                      Throughout his professional life, Mr. Cohen has cultivated a sophisticated level of industry knowledge, tempered by 30 years of hard-won experience in real estate investment and hard money lending. His expertise in this space spans both the United Kingdom and the United States, providing him with a unique, global perspective on high-stakes capital and property markets.
+                    </p>
+                    <p>
+                      Rather than resting on past successes, he continues to push boundaries by integrating cutting-edge technology with traditional investment vehicles. Today, his professional reach extends through <strong>Adam Cohen Today</strong>, leading the charge into the future of finance. This expansion into blockchain and private equity includes the launch of innovative Real Estate backed Security Tokens.
+                    </p>
+                  </div>
+                </motion.div>
+
+                <div className="grid md:grid-cols-2 gap-8 mt-12">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card p-8 border border-primary/10"
+                  >
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="p-3 rounded-full bg-primary/10 text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      </div>
+                      <h3 className="text-xl font-display font-bold">Business Brainstorm</h3>
+                    </div>
+                    <p className="text-muted-foreground font-light mb-4">A weekly, townhall-style think tank held every Monday at 5:00 PM EST, where entrepreneurs collaborate on real-time business challenges.</p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card p-8 border border-primary/10"
+                  >
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="p-3 rounded-full bg-primary/10 text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                      </div>
+                      <h3 className="text-xl font-display font-bold">The ACT Podcast</h3>
+                    </div>
+                    <p className="text-muted-foreground font-light mb-4">A newly launched weekly series featuring in-depth interviews with some of the world's most respected business leaders.</p>
+                  </motion.div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="sticky top-32 glass-card p-10 border border-primary/20 bg-gradient-to-br from-primary/10 to-transparent"
+                >
+                  <h3 className="text-2xl font-display font-bold mb-6 gold-gradient-text">Core Philosophy</h3>
+                  <div className="space-y-8">
+                    <div>
+                      <p className="text-sm uppercase tracking-widest text-primary mb-2 font-bold">Bridging The Gap</p>
+                      <p className="text-muted-foreground font-light leading-relaxed italic">
+                        "By bridging the gap between legacy experience and future technology, we provide entrepreneurs with the tools to dominate the modern global marketplace."
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm uppercase tracking-widest text-primary mb-2 font-bold">Global Perspective</p>
+                      <p className="text-muted-foreground font-light leading-relaxed italic">
+                        Leveraging 30 years of high-stakes capital and property market expertise across the UK and USA.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
 
         {/* Story Section */}
         <section className="section-padding px-6">

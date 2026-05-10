@@ -1,5 +1,5 @@
 import RealEstatePageClient from "./_components/RealEstatePageClient";
-import { DollarSign, TrendingUp, Home } from "lucide-react";
+import { DollarSign, TrendingUp, Globe } from "lucide-react";
 
 const services = [
   {
@@ -50,37 +50,37 @@ const services = [
     ],
   },
   {
-    id: "investment",
-    icon: <Home className="w-8 h-8" />,
-    title: "Real Estate Investment",
-    tagline: "Build Generational Wealth Through Real Assets.",
+    id: "blockchain",
+    icon: <Globe className="w-8 h-8" />,
+    title: "Blockchain",
+    tagline: "The Future of Real Estate Finance.",
     description:
-      "We provide institutional-grade investment opportunities for both accredited and non-accredited investors. Our focus is on high-yield, recession-resistant assets that deliver consistent cash flow and long-term capital appreciation.",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop",
+      "Integrating cutting-edge blockchain technology with traditional investment vehicles. We specialize in Real Estate backed Security Tokens, providing liquidity and global access to institutional-grade assets.",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80&fit=crop",
     features: [
       {
-        title: "Diversified Portfolios",
-        desc: "Access to a wide range of asset classes, including residential, commercial, and industrial properties."
+        title: "Security Token Offerings (STO)",
+        desc: "Asset-backed tokens representing fractional ownership in high-value real estate portfolios."
       },
       {
-        title: "Expert Asset Selection",
-        desc: "Meticulous due diligence and data-driven underwriting to identify undervalued opportunities."
+        title: "Enhanced Liquidity",
+        desc: "Secondary market trading capabilities for traditionally illiquid real estate investments."
       },
       {
-        title: "Risk-Adjusted Returns",
-        desc: "Strategies designed to maximize upside while protecting capital through conservative leverage."
+        title: "Smart Contract Automation",
+        desc: "Automated distributions, compliance, and governance through programmable legal frameworks."
       },
       {
-        title: "Full Transparency",
-        desc: "Regular performance updates, tax documentation, and clear communication on project milestones."
+        title: "Global Capital Access",
+        desc: "Democratizing access to US real estate for international investors through decentralized systems."
       },
       {
-        title: "Tax Optimization",
-        desc: "Structure investments to leverage depreciation and other tax benefits inherent in real estate."
+        title: "Transparent Ledger",
+        desc: "Immutable record-keeping and real-time reporting for absolute investor confidence."
       },
       {
-        title: "Exit Strategy Management",
-        desc: "Clear timelines and professionally managed liquidations to ensure maximum ROI for partners."
+        title: "Fractional Ownership",
+        desc: "Lowering entry barriers for high-quality assets while maintaining institutional-grade security."
       }
     ],
   },

@@ -7,7 +7,7 @@ import MagneticButton from "@/components/MagneticButton";
 import ProjectCard from "@/components/ProjectCard";
 import { getCmsData } from "@/lib/cms";
 import { Loader2, X, MapPin, BarChart3, Calendar, Briefcase, ExternalLink } from "lucide-react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 interface Project {
   id: string;
@@ -96,18 +96,6 @@ export default function PortfolioPageClient({
 
     return () => observer.disconnect();
   }, [loading, meta]);
-
-  // Disable body scroll when modal is open
-  useEffect(() => {
-    if (selectedProject) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [selectedProject]);
 
   return (
     <PageTransition>
@@ -282,9 +270,12 @@ export default function PortfolioPageClient({
 
         {/* Project Detail Modal */}
         <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
-          <DialogContent className="max-w-4xl p-0 overflow-hidden bg-[#0B0B0B] border-white/10 rounded-[2rem]">
+          <DialogContent 
+            className="max-w-4xl p-0 overflow-hidden bg-[#0B0B0B] border-white/10 rounded-[2rem]"
+            data-lenis-prevent
+          >
             {selectedProject && (
-              <div className="flex flex-col lg:flex-row h-full max-h-[90vh] overflow-y-auto lg:overflow-hidden">
+              <div className="flex flex-col lg:flex-row h-full max-h-[90vh] overflow-y-auto lg:overflow-hidden custom-scrollbar">
                 {/* Left: Image */}
                 <div className="lg:w-1/2 h-[300px] lg:h-auto relative">
                   <img 
@@ -302,7 +293,7 @@ export default function PortfolioPageClient({
                 </div>
 
                 {/* Right: Content */}
-                <div className="lg:w-1/2 p-8 md:p-12 flex flex-col gap-8 lg:overflow-y-auto">
+                <div className="lg:w-1/2 p-8 md:p-12 flex flex-col gap-8 lg:overflow-y-auto custom-scrollbar">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="px-4 py-1.5 rounded-xl bg-primary/10 border border-primary/20 text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
@@ -315,9 +306,9 @@ export default function PortfolioPageClient({
                         <X className="h-5 w-5" />
                       </button>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">
+                    <DialogTitle className="text-4xl md:text-5xl font-display font-bold text-white leading-tight">
                       {selectedProject.title}
-                    </h2>
+                    </DialogTitle>
                     <div className="flex flex-wrap gap-4 text-sm text-white/40">
                       <div className="flex items-center gap-1.5">
                         <MapPin className="h-4 w-4 text-primary" /> {selectedProject.location}
@@ -345,9 +336,9 @@ export default function PortfolioPageClient({
 
                   <div className="space-y-4">
                     <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">The Engagement</p>
-                    <p className="text-lg text-white/70 font-light leading-relaxed">
+                    <DialogDescription className="text-lg text-white/70 font-light leading-relaxed">
                       {selectedProject.description}
-                    </p>
+                    </DialogDescription>
                   </div>
 
                   {selectedProject.live_url && (

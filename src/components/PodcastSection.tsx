@@ -104,7 +104,7 @@ const PodcastSection = ({
               YouTube
             </a>
             <Link
-              href="/podcast#registration-form"
+              href="/podcast/interview-request"
               className="flex items-center gap-2.5 px-6 py-3 rounded-full text-xs font-bold tracking-wide transition-all duration-300 hover:scale-105 bg-[#D4AF37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)]"
             >
               <UserPlus className="w-5 h-5" />
@@ -181,7 +181,7 @@ const PodcastSection = ({
                     <Play className="h-4 w-4 fill-current" /> Watching Video
                   </div>
                 )}
-                <Link href="/podcast" className="text-sm font-semibold flex items-center gap-1.5 transition-colors duration-300 hover:text-[#D4AF37] text-white/50">
+                <Link href="/podcasts" className="text-sm font-semibold flex items-center gap-1.5 transition-colors duration-300 hover:text-[#D4AF37] text-white/50">
                   All Episodes <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -233,7 +233,7 @@ const PodcastSection = ({
               </motion.div>
             ))}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="mt-auto pt-2">
-              <Link href="/podcast" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:scale-[1.02] bg-[#D4AF37]/5 border border-[#D4AF37]/20 text-[#D4AF37]">
+              <Link href="/podcasts" className="flex items-center justify-center gap-2 w-full py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 hover:scale-[1.02] bg-[#D4AF37]/5 border border-[#D4AF37]/20 text-[#D4AF37]">
                 Browse All Episodes <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>

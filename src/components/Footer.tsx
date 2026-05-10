@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Linkedin, Instagram, Youtube, Twitter, ArrowUpRight } from "lucide-react";
+import { Linkedin, Instagram, Youtube, Twitter, Facebook, ArrowUpRight } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const Footer = ({ settings }: { settings?: any }) => {
@@ -18,14 +18,14 @@ const Footer = ({ settings }: { settings?: any }) => {
     ? "via-[#D4AF37]/20"
     : "via-primary/30";
 
-  const brandSecondary = isLight ? "text-white/65"  : "text-foreground/80";
-  const bodyText       = isLight ? "text-white/45"  : "text-muted-foreground";
-  const headingClass   = isLight ? "text-white/90"  : "text-foreground";
+  const brandSecondary = isLight ? "text-white/80"  : "text-foreground/80";
+  const bodyText       = isLight ? "text-white/70"  : "text-muted-foreground";
+  const headingClass   = isLight ? "text-white"     : "text-foreground";
   const linkClass      = isLight
-    ? "text-white/55 hover:text-[#D4AF37]"
+    ? "text-white/75 hover:text-[#D4AF37]"
     : "text-muted-foreground hover:text-primary";
   const socialClass   = isLight
-    ? "border-white/10 text-white/45 hover:text-[#D4AF37] hover:border-[#D4AF37]/50"
+    ? "border-white/20 text-white/60 hover:text-[#D4AF37] hover:border-[#D4AF37]/50"
     : "border-border/10 text-muted-foreground hover:text-primary hover:border-primary/50";
 
   const ctaCardClass  = isLight
@@ -33,13 +33,13 @@ const Footer = ({ settings }: { settings?: any }) => {
     : "glass-card p-8 border border-primary/20 bg-primary/5 rounded-3xl";
   const ctaCardStyle  = isLight ? { backgroundColor: "#1A1A1A" } : {};
   const ctaHeading    = isLight ? "text-white"    : "";
-  const ctaBody       = isLight ? "text-white/45" : "text-muted-foreground";
+  const ctaBody       = isLight ? "text-white/60" : "text-muted-foreground";
   const otherLink     = isLight
-    ? "text-[10px] tracking-widest uppercase text-white/30 hover:text-[#D4AF37] mt-6 block text-center transition-colors font-bold"
+    ? "text-[10px] tracking-widest uppercase text-white/50 hover:text-[#D4AF37] mt-6 block text-center transition-colors font-bold"
     : "text-[10px] tracking-widest uppercase text-muted-foreground hover:text-primary mt-6 block text-center transition-colors font-bold";
 
-  const bottomBorder  = isLight ? "border-white/8"       : "border-border/10";
-  const bottomText    = isLight ? "text-white/28"         : "text-muted-foreground";
+  const bottomBorder  = isLight ? "border-white/10"       : "border-border/10";
+  const bottomText    = isLight ? "text-white/50"         : "text-muted-foreground";
   const bottomLink    = isLight ? "hover:text-[#D4AF37]" : "hover:text-primary";
   // ──────────────────────────────────────────────────────────────────────────
 
@@ -68,14 +68,17 @@ const Footer = ({ settings }: { settings?: any }) => {
             </p>
             <div className="flex gap-5">
               {[
-                { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn" },
-                { icon: <Instagram className="w-5 h-5" />, label: "Instagram" },
-                { icon: <Twitter className="w-5 h-5" />, label: "Twitter" },
-                { icon: <Youtube className="w-5 h-5" />, label: "YouTube" },
+                { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", href: "https://www.linkedin.com/in/adamcohentoday/" },
+                { icon: <Instagram className="w-5 h-5" />, label: "Instagram", href: "https://www.instagram.com/adamcohentoday" },
+                { icon: <Twitter className="w-5 h-5" />, label: "X (Twitter)", href: "https://x.com/adamcohenceo" },
+                { icon: <Youtube className="w-5 h-5" />, label: "YouTube", href: "https://www.youtube.com/@adamscohentoday" },
+                { icon: <Facebook className="w-5 h-5" />, label: "Facebook", href: "https://www.facebook.com/adamcohentodayinc" },
               ].map((social) => (
                 <a
                   key={social.label}
-                  href="#"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 ${socialClass}`}
                 >

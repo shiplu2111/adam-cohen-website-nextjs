@@ -47,24 +47,33 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="relative h-[600px] md:h-[500px] overflow-hidden bg-black pt-24 md:pt-20" ref={emblaRef}>
+    <section className="relative h-[670px] md:h-[570px] overflow-hidden bg-black pt-24 md:pt-20" ref={emblaRef}>
       <div className="flex h-full">
         {slides.map((slide, index) => (
           <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 h-full">
             {/* Background */}
             <div className={`absolute inset-0 ${typeof slide.bg === 'string' && slide.bg.startsWith('bg-') ? slide.bg : ''}`}>
               {(typeof slide.bg !== 'string' || !slide.bg.startsWith('bg-')) && (
-                <img 
-                  src={(typeof slide.bg === 'string' ? (slide.bg || null) : (slide.bg ? (slide.bg as any).src : null)) as any} 
-                  alt="" 
-                  className="w-full h-full object-cover opacity-40 mix-blend-overlay" 
-                />
+                <>
+                  {/* Desktop Background */}
+                  <img 
+                    src={(typeof slide.bg === 'string' ? (slide.bg || null) : (slide.bg ? (slide.bg as any).src : null)) as any} 
+                    alt="" 
+                    className="hidden md:block w-full h-full object-cover opacity-40 mix-blend-overlay" 
+                  />
+                  {/* Mobile Background (Portrait Image) */}
+                  <img 
+                    src={(typeof (slide.portrait || slide.bg) === 'string' ? (slide.portrait || slide.bg) : ((slide.portrait || slide.bg) ? (slide.portrait || slide.bg as any).src : null)) as any} 
+                    alt="" 
+                    className="md:hidden w-full h-full object-cover opacity-40 mix-blend-overlay" 
+                  />
+                </>
               )}
             </div>
 
             <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center max-w-[1400px] mx-auto px-6 lg:px-12">
               {/* Left Content */}
-              <div className="w-full md:w-[60%] flex flex-col justify-center text-center md:text-left h-full">
+              <div className="w-full md:w-[60%] flex flex-col justify-end md:justify-center text-center md:text-left h-full pb-24 md:pb-0">
                 <AnimatePresence mode="wait">
                   {selectedIndex === index && (
                     <motion.div
@@ -89,7 +98,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                               {slide.title3}
                             </span>
                           </h1>
-                          <p className="text-sm md:text-base font-black text-white tracking-tighter uppercase">
+                          <p className="text-sm md:text-base font-black text-white tracking-tighter uppercase max-w-[320px] mx-auto md:max-w-none md:mx-0">
                             {slide.title4}
                           </p>
                           <h1 className="text-3xl md:text-4xl lg:text-5xl leading-none font-black italic marketing-red-gradient text-stroke-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] uppercase">
@@ -109,7 +118,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                           <div className="bg-white text-black inline-block px-3 py-1 text-xl md:text-2xl font-black uppercase">
                             {slide.title3}
                           </div>
-                          <p className="text-lg md:text-xl font-black text-[#fbbf24] tracking-tighter uppercase mb-4">
+                          <p className="text-lg md:text-xl font-black text-[#fbbf24] tracking-tighter uppercase mb-4 max-w-[320px] mx-auto md:max-w-none md:mx-0">
                             {slide.title4}
                           </p>
                         </>
@@ -140,7 +149,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                               ADAM COHEN
                             </div>
                           </div>
-                          <p className="text-base md:text-lg font-bold text-white italic uppercase">
+                          <p className="text-base md:text-lg font-bold text-white italic uppercase max-w-[320px] mx-auto md:max-w-none md:mx-0">
                             {slide.title3}
                           </p>
                           <div className="text-xl md:text-2xl font-black text-[#fbbf24] mb-4 uppercase">
@@ -162,7 +171,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
               </div>
 
               {/* Right Side Portrait */}
-              <div className="w-full md:w-[40%] h-full relative flex items-center justify-center md:justify-end overflow-visible">
+              <div className="hidden w-full md:w-[40%] h-full relative flex items-center justify-center md:justify-end overflow-visible">
                 <AnimatePresence mode="wait">
                   {selectedIndex === index && (
                     <motion.div
@@ -199,13 +208,13 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
       {/* Navigation Controls */}
       <button
         onClick={scrollPrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-black/80 text-white p-4 transition-all"
+        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-black/80 text-white p-4 transition-all"
       >
         <ChevronLeft className="w-8 h-8" />
       </button>
       <button
         onClick={scrollNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-black/80 text-white p-4 transition-all"
+        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-black/80 text-white p-4 transition-all"
       >
         <ChevronRight className="w-8 h-8" />
       </button>

@@ -209,13 +209,13 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
               <Youtube className="w-5 h-5 text-[#D4AF37]" />
               YouTube
             </a>
-            <button
-              onClick={() => document.getElementById('registration-form')?.scrollIntoView({ behavior: 'smooth' })}
+            <Link
+              href="/podcast/interview-request"
               className="flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#D4AF37] text-black text-sm font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
             >
               <UserPlus className="w-5 h-5" />
               Podcast with Adam
-            </button>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -349,101 +349,6 @@ export default function CohenTVPageClient({ episodes, videoPodcasts, platforms, 
         </section>
       )}
 
-      {/* Registration Form Section */}
-      <section id="registration-form" className="py-24 px-6 relative overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, #0B0B0B 0%, #1a1200 60%, #0B0B0B 100%)" }}
-        />
-        <div className="absolute inset-0 opacity-10"
-          style={{ background: "radial-gradient(circle at 50% 50%, #D4AF37, transparent 70%)" }} />
-
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="w-16 h-16 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center mx-auto mb-6">
-              <UserPlus className="w-8 h-8 text-[#D4AF37]" />
-            </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
-              Podcast with <span className="gold-gradient-text">Adam Cohen</span>
-            </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-white/60 max-w-xl mx-auto font-light">
-              Ready to share your story or expertise? Apply now to be a guest on the Cohen TV Podcast and reach a global audience of high-performers.
-            </motion.p>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="p-8 md:p-12 border border-white/10 shadow-2xl bg-black/60 backdrop-blur-xl rounded-2xl"
-          >
-            <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Full Name *</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="Your name" 
-                  value={formData.full_name}
-                  onChange={(e) => setFormData({...formData, full_name: e.target.value})}
-                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Email Address *</label>
-                <input 
-                  type="email" 
-                  required
-                  placeholder="email@example.com" 
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Phone Number</label>
-                <input 
-                  type="tel" 
-                  placeholder="+1 (555) 000-0000" 
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Website / Social Link</label>
-                <input 
-                  type="url" 
-                  placeholder="https://..." 
-                  value={formData.website_url}
-                  onChange={(e) => setFormData({...formData, website_url: e.target.value})}
-                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors" 
-                />
-              </div>
-              <div className="md:col-span-2 space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">Tell us about yourself / your topic</label>
-                <textarea 
-                  rows={4} 
-                  placeholder="What would you like to discuss with Adam?" 
-                  value={formData.topic}
-                  onChange={(e) => setFormData({...formData, topic: e.target.value})}
-                  className="w-full bg-black/30 border border-white/20 rounded-xl px-4 py-4 text-white placeholder:text-white/40 focus:border-[#D4AF37] focus:outline-none transition-colors resize-none"
-                ></textarea>
-              </div>
-              <div className="md:col-span-2 pt-4">
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="w-full py-5 rounded-xl bg-[#D4AF37] text-black font-bold text-lg flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_30px_rgba(212,175,55,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</> : <>Submit Application <Send className="w-5 h-5" /></>}
-                </button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="section-padding border-t border-black/5 dark:border-white/5 bg-background">

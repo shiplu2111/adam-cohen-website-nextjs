@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import PageTransition from "@/components/PageTransition";
 import {
-  Home, TrendingDown, DollarSign, Calendar, PiggyBank,
-  ArrowRight, CheckCircle2, Zap, BarChart3, ArrowDownRight, Building2
+  Globe, Zap, ShieldCheck, ArrowRight, CheckCircle2, 
+  Layers, Cpu, Database, Share2
 } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -28,27 +28,23 @@ interface Step {
   desc: string;
 }
 
-interface InvestmentPageClientProps {
+interface BlockchainPageClientProps {
   title: string;
   subtitle: string;
   pillars: Pillar[];
   included: string[];
   results: Result[];
   steps: Step[];
-  ctaTitle?: string;
-  ctaButtonText?: string;
 }
 
-export default function InvestmentPageClient({
+export default function BlockchainPageClient({
   title,
   subtitle,
   pillars,
   included,
   results,
-  steps,
-  ctaTitle = "Ready to Build Your Portfolio?",
-  ctaButtonText = "Book a Strategy Call"
-}: InvestmentPageClientProps) {
+  steps
+}: BlockchainPageClientProps) {
   return (
     <PageTransition>
       {/* Hero */}
@@ -58,7 +54,7 @@ export default function InvestmentPageClient({
           style={{ background: "linear-gradient(135deg, #07050a 0%, #0b0a07 60%, #07050a 100%)" }}
         />
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.1]"
           style={{ background: "radial-gradient(ellipse at 35% 55%, #D4AF37, transparent 60%)" }}
         />
 
@@ -68,7 +64,7 @@ export default function InvestmentPageClient({
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
             style={{ backgroundColor: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.2)" }}
           >
-            <span className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase">Real Estate</span>
+            <span className="text-[#D4AF37] text-xs font-bold tracking-[0.2em] uppercase">Blockchain & DeFi</span>
           </motion.div>
 
           <motion.h1
@@ -104,10 +100,10 @@ export default function InvestmentPageClient({
             className="flex flex-wrap gap-4 mt-10"
           >
             <Link href="/contact" className="hero-btn inline-flex items-center gap-2">
-              Get Started <ArrowRight className="w-4 h-4" />
+              Explore STOs <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="/real-estate" className="hero-btn-outline">
-              All Real Estate Services
+              Real Estate Services
             </Link>
           </motion.div>
         </div>
@@ -121,14 +117,14 @@ export default function InvestmentPageClient({
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-medium"
             >
-              The Methodology
+              The Innovation
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-5xl font-display font-bold"
             >
-              The 4 <span className="gold-gradient-text">Pillars</span>
+              Tokenization <span className="gold-gradient-text">Protocol</span>
             </motion.h2>
           </div>
 
@@ -161,7 +157,7 @@ export default function InvestmentPageClient({
         </div>
       </section>
 
-      {/* What's Included */}
+      {/* Security & Compliance */}
       <section className="section-padding bg-secondary/30">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -170,12 +166,12 @@ export default function InvestmentPageClient({
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-medium">The Program</p>
+            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-medium">Regulation</p>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-              Institutional <span className="gold-gradient-text">Excellence</span>
+              Institutional <span className="gold-gradient-text">Compliance</span>
             </h2>
             <p className="text-muted-foreground mb-8 font-light leading-relaxed">
-              We provide a complete investment ecosystem—analysis, strategy, and high-performance asset management to ensure your wealth grows securely and predictably.
+              Our blockchain solutions are built on a foundation of legal compliance. We integrate KYC/AML protocols directly into the smart contracts to ensure that every transaction meets global regulatory standards.
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {included.map((item) => (
@@ -195,25 +191,25 @@ export default function InvestmentPageClient({
             className="relative rounded-2xl overflow-hidden gold-glow"
           >
             <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&fit=crop"
-              alt="Real Estate Investment"
+              src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80&fit=crop"
+              alt="Blockchain Technology"
               className="w-full h-[520px] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             <div className="absolute bottom-8 left-8 right-8">
               <div className="p-6 rounded-2xl" style={{ backgroundColor: "rgba(11,11,11,0.85)", border: "1px solid rgba(212,175,55,0.2)", backdropFilter: "blur(12px)" }}>
                 <div className="flex items-center gap-2 mb-1">
-                  <Building2 className="w-4 h-4 text-[#D4AF37]" />
-                  <p className="text-[#D4AF37] text-xs font-bold tracking-widest uppercase">Wealth Creation</p>
+                  <Cpu className="w-4 h-4 text-[#D4AF37]" />
+                  <p className="text-[#D4AF37] text-xs font-bold tracking-widest uppercase">Smart Infrastructure</p>
                 </div>
-                <p className="text-white font-display font-bold text-xl leading-snug">Building institutional-grade portfolios since 2018.</p>
+                <p className="text-white font-display font-bold text-xl leading-snug">The intersection of physical assets and digital sovereignty.</p>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Process */}
+      {/* Tokenization Steps */}
       <section className="section-padding">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
@@ -221,7 +217,7 @@ export default function InvestmentPageClient({
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="text-4xl md:text-5xl font-display font-bold"
             >
-              Our <span className="gold-gradient-text">Process</span>
+              The <span className="gold-gradient-text">Roadmap</span>
             </motion.h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -246,19 +242,19 @@ export default function InvestmentPageClient({
       {/* CTA */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto text-center glass-card p-12 md:p-20 border border-primary/20">
-          <Building2 className="w-10 h-10 text-primary mx-auto mb-6" />
+          <Database className="w-10 h-10 text-primary mx-auto mb-6" />
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            {ctaTitle}
+            Ready to Tokenize?
           </h2>
           <p className="text-muted-foreground mb-10 max-w-xl mx-auto font-light leading-relaxed">
-            Every great portfolio starts with a single high-quality asset. Let's discuss your investment goals and find the right fit for your capital.
+            Unlock the hidden value in your real estate portfolio through blockchain technology. Let's discuss your asset and how it fits into the future of finance.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" className="hero-btn inline-flex items-center gap-2">
-              {ctaButtonText} <ArrowRight className="w-4 h-4" />
+              Book a Call <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="/real-estate/private-equity" className="hero-btn-outline">
-              Explore Private Equity
+              Private Equity
             </Link>
           </div>
         </div>

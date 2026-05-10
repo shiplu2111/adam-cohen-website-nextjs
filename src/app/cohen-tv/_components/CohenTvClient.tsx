@@ -155,7 +155,7 @@ export default function CohenTvClient({ initialVideos, settings }: CohenTvClient
                       YouTube
                     </a>
                     <Link
-                      href="/podcast#registration-form"
+                      href="/podcast/interview-request"
                       className="flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#D4AF37] text-black text-sm font-bold transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
                     >
                       <UserPlus className="w-5 h-5" />

@@ -55,17 +55,13 @@ const AboutSection = () => {
               className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light"
             >
               <p>
-                Adam Cohen is a UK-born entrepreneur who has called the United States home for over 25 years. With deep expertise in real estate investment, business, and finance, Adam has built a reputation for helping clients achieve remarkable results.
-
+                Originally from the UK, Adam Cohen has spent over 25 years building his life and career in the United States.
               </p>
-              {/* <p>
-                I believe that true entrepreneurship is an art form—a synthesis of cold, hard
-                strategy and human-centric vision. My philosophy is rooted in the belief that
-                when you empower people with the right systems, momentum becomes inevitable.
-              </p> */}
+              <p>
+                His deep expertise in real estate investment, business strategy, and finance has made him a trusted partner for clients seeking standout results.
+              </p>
               <p className="text-foreground font-medium italic border-l-2 border-primary pl-6 py-2">
-                "His dynamic approach and international perspective set him apart in today's competitive market.
-                "
+                "His dynamic approach and international perspective set him apart in today's competitive global marketplace."
               </p>
             </motion.div>
 
