@@ -5,6 +5,7 @@ import { Linkedin, Instagram, Youtube, Twitter, Facebook, ArrowUpRight } from "l
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
 import logoImg from "@/assets/logo.jpg";
+import ElectricBorder from "./ui/ElectricBorder";
 
 const Footer = ({ settings }: { settings?: any }) => {
   const { theme, mounted } = useTheme();
@@ -61,6 +62,13 @@ const Footer = ({ settings }: { settings?: any }) => {
           {/* Column 1: Brand Identity */}
           <div className="space-y-8">
             <Link href="/" className="inline-block">
+            <ElectricBorder
+                          color="#D4AF37"
+                          speed={1.5}
+                          chaos={0.02}
+                          borderRadius={2}
+                          className="hover-trigger"
+                        >
               <Image 
                 src={logoImg} 
                 alt="Adam Cohen Today Logo" 
@@ -68,6 +76,7 @@ const Footer = ({ settings }: { settings?: any }) => {
                 height={64} 
                 className="object-contain rounded border border-white/10 hover:border-white/20 transition-all duration-300"
               />
+              </ElectricBorder >
             </Link>
             <p className={`${bodyText} font-light leading-relaxed max-w-xs`}>
               Engineering empires through strategic investment, elite advisory, and

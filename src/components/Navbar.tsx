@@ -9,6 +9,7 @@ import { ChevronDown } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
 import logoImg from "@/assets/logo.jpg";
+import ElectricBorder from "./ui/ElectricBorder";
 
 interface NavLink {
   label: string;
@@ -145,6 +146,13 @@ const Navbar = ({ settings }: { settings?: any }) => {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0">
+          <ElectricBorder
+                          color="#D4AF37"
+                          speed={1.5}
+                          chaos={0.02}
+                          borderRadius={2}
+                          className="hover-trigger"
+                        > 
             <Image 
               src={logoImg} 
               alt="Adam Cohen Today Logo" 
@@ -153,6 +161,7 @@ const Navbar = ({ settings }: { settings?: any }) => {
               className="object-contain rounded border border-primary/10 hover:border-primary/30 transition-all duration-300"
               priority
             />
+            </ElectricBorder>
           </Link>
 
           {/* Desktop Nav */}
@@ -237,10 +246,26 @@ const Navbar = ({ settings }: { settings?: any }) => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
+            <ElectricBorder
+              color="#D4AF37"
+              speed={.5}
+              chaos={0.01}
+              borderRadius={28}
+              className="hover-trigger"
+            >
             <ThemeToggle />
-            <Link href="/contact" className="hero-btn text-xs py-3 px-6">
-              Book a Call
-            </Link>
+            </ElectricBorder>
+            <ElectricBorder
+              color="#D4AF37"
+              speed={1.5}
+              chaos={0.02}
+              borderRadius={28}
+              className="hover-trigger"
+            >
+              <Link href="/contact" className="hero-btn text-xs py-3 px-6 block">
+                Book a Call
+              </Link>
+            </ElectricBorder>
           </div>
 
           {/* Mobile toggle */}

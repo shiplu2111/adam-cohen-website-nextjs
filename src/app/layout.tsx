@@ -5,6 +5,7 @@ import LenisProvider from "@/components/LenisProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PreloaderWrapper from "@/components/PreloaderWrapper";
+import ClickSpark from "@/components/ui/ClickSpark";
 import "@/index.css";
 import { getSettings } from "@/lib/cms";
 
@@ -53,9 +54,11 @@ export default async function RootLayout({
         <Providers>
           <PreloaderWrapper>
             <LenisProvider>
-              <Navbar settings={settings} />
-              <main>{children}</main>
-              <Footer settings={settings} />
+              <ClickSpark sparkColor='#D4AF37' sparkSize={12} sparkRadius={22} sparkCount={10} duration={500}>
+                <Navbar settings={settings} />
+                <main>{children}</main>
+                <Footer settings={settings} />
+              </ClickSpark>
             </LenisProvider>
           </PreloaderWrapper>
         </Providers>
