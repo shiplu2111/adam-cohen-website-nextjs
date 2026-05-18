@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Linkedin, Instagram, Youtube, Twitter, Facebook, ArrowUpRight } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import Image from "next/image";
+import logoImg from "@/assets/logo.jpg";
 
 const Footer = ({ settings }: { settings?: any }) => {
   const { theme, mounted } = useTheme();
@@ -58,9 +60,14 @@ const Footer = ({ settings }: { settings?: any }) => {
 
           {/* Column 1: Brand Identity */}
           <div className="space-y-8">
-            <Link href="/" className="font-display text-2xl font-bold tracking-tight block">
-              <span className="gold-gradient-text">{settings?.name?.split(' ')[0] || "ADAM"}</span>
-              <span className={`ml-1 ${brandSecondary}`}>{settings?.name?.split(' ').slice(1).join(' ') || "COHEN"}</span>
+            <Link href="/" className="inline-block">
+              <Image 
+                src={logoImg} 
+                alt="Adam Cohen Today Logo" 
+                width={85} 
+                height={64} 
+                className="object-contain rounded border border-white/10 hover:border-white/20 transition-all duration-300"
+              />
             </Link>
             <p className={`${bodyText} font-light leading-relaxed max-w-xs`}>
               Engineering empires through strategic investment, elite advisory, and

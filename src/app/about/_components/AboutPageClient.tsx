@@ -77,7 +77,7 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
                 </h1>
                 <div className="space-y-6 text-xl text-muted-foreground leading-relaxed font-light max-w-2xl">
                   <p>
-                    Adam S. Cohen is a highly accomplished entrepreneur who has built a distinguished career defined by consistent business achievements and a reputation for resolute, visionary leadership.
+                    An accomplished entrepreneur, Adam S. Cohen brings more than 30 years of hands-on experience across multiple sectors of the telecommunications, real estate, private lending, and equity industries.
                   </p>
                 </div>
               </motion.div>
@@ -111,13 +111,19 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
                   
                   <div className="space-y-6 text-lg md:text-xl text-muted-foreground font-light leading-relaxed">
                     <p>
-                      Mr. Cohen's journey began remarkably early; at just 16 years old, he displayed a precocious instinct for emerging markets by founding one of London's first cellular telephone retailers. This early venture served as the foundation for a trajectory that has seen him achieve world-class results across two sectors: telecommunications and real estate.
+                      Adam launched his first business in 1990 at age 16 in cellular telecommunications, starting with a single retail store. He quickly expanded the operation to five stores before pivoting into wholesale, distribution, and the worldwide export of his own brand of mobile accessories. Within less than five years of its launch, he successfully sold the business to a public company.
                     </p>
                     <p>
-                      Throughout his professional life, Mr. Cohen has cultivated a sophisticated level of industry knowledge, tempered by 30 years of hard-won experience in real estate investment and hard money lending. His expertise in this space spans both the United Kingdom and the United States, providing him with a unique, global perspective on high-stakes capital and property markets.
+                      His career has since spanned residential and commercial real estate brokerage, real estate investment and development, portfolio building, and the structuring and funding of hard money and private lending transactions. Recognized for his practical, transaction-driven approach, Adam has built a reputation for understanding both the operational and capital sides of real estate, allowing him to identify opportunities, structure deals creatively, and deliver solutions across a broad range of market conditions.
                     </p>
                     <p>
-                      Rather than resting on past successes, he continues to push boundaries by integrating cutting-edge technology with traditional investment vehicles. Today, his professional reach extends through <strong>Adam Cohen Today</strong>, leading the charge into the future of finance. This expansion into blockchain and private equity includes the launch of innovative Real Estate backed Security Tokens.
+                      Over the course of his career, Adam has funded more than <strong>$1 billion</strong> in real estate transactions in both the United Kingdom and the United States. His experience has ranged from private investments and direct lending to the syndication of both debt and equity for real estate projects. This breadth of experience has enabled him to work across the full capital stack, advising on and structuring transactions that support acquisitions, development, recapitalizations, distressed assets, and value-add opportunities.
+                    </p>
+                    <p>
+                      His long-term success has been built on a deep understanding of market cycles, disciplined underwriting, and the ability to align private lending and equity investors with carefully selected real estate opportunities.
+                    </p>
+                    <p>
+                      Prior to 2008, Adam focused extensively on raising capital, structuring equity, and assembling private partnerships to pursue real estate transactions and business opportunities. During this period, he developed significant expertise in investor relations, partnership structuring, and private capital formation, creating vehicles designed to support both growth and long-term value creation. His entrepreneurial background, marketing expertise, and ability to cultivate investor confidence positioned him to navigate increasingly complex deals while building relationships with private investors, strategic partners, and equity providers.
                     </p>
                   </div>
                 </motion.div>
@@ -165,15 +171,15 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
                   <h3 className="text-2xl font-display font-bold mb-6 gold-gradient-text">Core Philosophy</h3>
                   <div className="space-y-8">
                     <div>
-                      <p className="text-sm uppercase tracking-widest text-primary mb-2 font-bold">Bridging The Gap</p>
+                      <p className="text-sm uppercase tracking-widest text-primary mb-2 font-bold">Strategic Branding</p>
                       <p className="text-muted-foreground font-light leading-relaxed italic">
-                        "By bridging the gap between legacy experience and future technology, we provide entrepreneurs with the tools to dominate the modern global marketplace."
+                        "Throughout his career, Adam has proved to be an expert in marketing, utilizing strategic branding and market positioning as instrumental drivers for rapid success and growth."
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm uppercase tracking-widest text-primary mb-2 font-bold">Global Perspective</p>
+                      <p className="text-sm uppercase tracking-widest text-primary mb-2 font-bold">Investor Relations</p>
                       <p className="text-muted-foreground font-light leading-relaxed italic">
-                        Leveraging 30 years of high-stakes capital and property market expertise across the UK and USA.
+                        Cultivating investor confidence to navigate increasingly complex deals while building relationships with private investors, strategic partners, and equity providers.
                       </p>
                     </div>
                   </div>
@@ -254,13 +260,13 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
-              {[
-                { val: "35+", label: "Years in Business", desc: "" },
-                { val: "34K+", label: "LinkedIn Followers", desc: "" },
-                { val: "Top 1%", label: "LinkedIn Profile", desc: "" },
-                { val: "25+", label: "Years in USA", desc: "" },
-                { val: "16", label: "Age at First Business", desc: "" },
-              ].map((item, i) => (
+              {(achievements && achievements.length > 0 ? achievements : [
+                { val: "$1B+", label: "Transactions Funded", desc: "Across UK & US" },
+                { val: "30+", label: "Years of Experience", desc: "Hands-on leadership" },
+                { val: "Age 16", label: "First Cellular Venture", desc: "Sold within 5 years" },
+                { val: "LBS MBA", label: "London Business School", desc: "Graduated in 1999" },
+                { val: "25+", label: "Years in USA", desc: "Expanding footprint" },
+              ]).map((item, i) => (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: 30 }}
@@ -356,7 +362,7 @@ export default function AboutPageClient({ hero, storyBlocks, achievements, diffe
                   <h3 className="text-3xl md:text-4xl font-display font-bold gold-gradient-text">Our Mission</h3>
                 </div>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light">
-                  Empower professionals and business owners with the tools and guidance needed to thrive. We are excited to announce a new suite of services dedicated to brand development and management.
+                  Based on his enormous success, Adam leverages his extensive track record to consult, mentor, and guide other entrepreneurs. He helps them stand out from the crowd, navigate market complexities, and achieve their maximum success through professional brand development and management.
                 </p>
               </motion.div>
 

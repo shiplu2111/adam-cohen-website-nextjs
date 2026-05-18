@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import logoImg from "@/assets/logo.jpg";
 
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -45,12 +47,16 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-12"
+          className="mb-12 flex justify-center"
         >
-          <span className="font-display text-4xl md:text-5xl font-bold tracking-tight">
-            <span className="gold-gradient-text">ADAM</span>
-            <span className="text-foreground/60 ml-2">COHEN</span>
-          </span>
+          <Image 
+            src={logoImg} 
+            alt="Adam Cohen Today Logo" 
+            width={120} 
+            height={90} 
+            className="object-contain rounded border border-primary/20 gold-glow"
+            priority
+          />
         </motion.div>
 
         {/* Progress bar */}

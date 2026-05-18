@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { ChevronDown } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import Image from "next/image";
+import logoImg from "@/assets/logo.jpg";
 
 interface NavLink {
   label: string;
@@ -142,9 +144,15 @@ const Navbar = ({ settings }: { settings?: any }) => {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="font-display text-xl font-bold tracking-tight flex-shrink-0">
-            <span className="gold-gradient-text">{settings?.name?.split(' ')[0] || "ADAM"}</span>
-            <span className={`ml-1 ${logoSecondary}`}>{settings?.name?.split(' ').slice(1).join(' ') || "COHEN"}</span>
+          <Link href="/" className="flex items-center flex-shrink-0">
+            <Image 
+              src={logoImg} 
+              alt="Adam Cohen Today Logo" 
+              width={75} 
+              height={56} 
+              className="object-contain rounded border border-primary/10 hover:border-primary/30 transition-all duration-300"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

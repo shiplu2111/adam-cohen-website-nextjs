@@ -55,13 +55,13 @@ const AboutSection = () => {
               className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light"
             >
               <p>
-                Originally from the UK, Adam Cohen has spent over 25 years building his life and career in the United States.
+                An accomplished entrepreneur, Adam S. Cohen brings more than 30 years of hands-on experience across multiple sectors of cellular telecommunications, real estate, private lending, and equity markets.
               </p>
               <p>
-                His deep expertise in real estate investment, business strategy, and finance has made him a trusted partner for clients seeking standout results.
+                Over the course of his career, Adam has funded more than <strong>$1 billion</strong> in real estate transactions in both the UK and US, developing an outstanding reputation for understanding both the operational and capital sides of high-stakes investments.
               </p>
               <p className="text-foreground font-medium italic border-l-2 border-primary pl-6 py-2">
-                "His dynamic approach and international perspective set him apart in today's competitive global marketplace."
+                "Leveraging his exceptional track record, Adam consults, mentors, and guides other entrepreneurs to navigate market complexities and achieve their maximum success."
               </p>
             </motion.div>
 
