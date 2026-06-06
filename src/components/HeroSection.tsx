@@ -47,7 +47,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="relative h-[670px] md:h-[570px] overflow-hidden bg-black pt-24 md:pt-20" ref={emblaRef}>
+    <section className="relative h-[670px] md:h-[570px] xl:h-[max(620px,min(850px,38vw))] overflow-hidden bg-black pt-24 md:pt-20" ref={emblaRef}>
       <div className="flex h-full">
         {slides.map((slide, index) => (
           <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 h-full">
@@ -59,7 +59,7 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
                   <img
                     src={(typeof slide.bg === 'string' ? (slide.bg || null) : (slide.bg ? (slide.bg as any).src : null)) as any}
                     alt=""
-                    className="hidden md:block w-full h-full object-cover opacity-50 mix-blend-overlay"
+                    className="hidden md:block w-full h-full object-cover object-center xl:object-[82%_28%] 2xl:object-[85%_22%] min-[1920px]:object-[88%_18%] opacity-50 mix-blend-overlay"
                   />
                   {/* Mobile Background (Portrait Image) */}
                   <img
