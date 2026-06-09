@@ -18,7 +18,7 @@ const AboutSection = () => {
           >
             <div className="relative rounded-2xl overflow-hidden gold-glow group">
               <Image
-                src="/gallery/33.jpeg"
+                src="/images/IMG1.jpg"
                 alt="Adam Cohen"
                 width={600}
                 height={500}
@@ -55,7 +55,7 @@ const AboutSection = () => {
               className="space-y-6 text-lg text-muted-foreground leading-relaxed font-light"
             >
               <p>
-                An accomplished entrepreneur, Adam S. Cohen brings more than 30 years of hands-on experience across multiple sectors of cellular telecommunications, real estate, private lending, and equity markets.
+                An accomplished entrepreneur, Adam S. Cohen brings over 35 years of hands-on experience across multiple sectors of cellular telecommunications, real estate, private lending, and equity markets.
               </p>
               <p>
                 Over the course of his career, Adam has funded more than <strong>$1 billion</strong> in real estate transactions in both the UK and US, developing an outstanding reputation for understanding both the operational and capital sides of high-stakes investments.

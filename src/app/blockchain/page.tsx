@@ -40,10 +40,10 @@ const included = [
 ];
 
 const results = [
-  { val: "$100M+",  label: "Liquidity Target",  sub: "projected secondary volume" },
-  { val: "24/7",    label: "Market Access",     sub: "continuous trading" },
-  { val: "Global",  label: "Investor Base",     sub: "borderless capital" },
-  { val: "100%",    label: "Transparency",      sub: "immutable ledger" },
+  { val: "$100M+", label: "Liquidity Target", sub: "projected secondary volume" },
+  { val: "24/7", label: "Market Access", sub: "continuous trading" },
+  { val: "Global", label: "Investor Base", sub: "borderless capital" },
+  { val: "100%", label: "Transparency", sub: "immutable ledger" },
 ];
 
 const steps = [
@@ -76,13 +76,13 @@ export const metadata = {
 
 export default function BlockchainPage() {
   return (
-    <BlockchainPageClient 
+    <BlockchainPageClient
       title="Blockchain & Tokenization"
       subtitle="Integrating cutting-edge technology with traditional investment vehicles to unlock the future of real estate finance."
-      pillars={pillars} 
-      included={included} 
-      results={results} 
-      steps={steps} 
+      pillars={pillars}
+      included={included}
+      results={results}
+      steps={steps}
     />
   );
 }

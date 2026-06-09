@@ -1,44 +1,38 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import img1 from "@/assets/1.png";
-import img2 from "@/assets/2.jpeg";
-import img3 from "@/assets/3.jpeg";
-import imgMM from "@/assets/mm.png";
-import heroTexture from "@/assets/hero-texture.png";
 
-interface HeroSlideProps {
+export interface HeroSlideProps {
   id: number | string;
-  type: "networking" | "taxes" | "podcast" | "ads";
-  title1: string;
-  title2: string;
-  title3: string;
-  title4: string;
-  location?: string;
-  date?: string;
-  theme?: string;
-  mask?: string;
-  bg?: string | { src: string };
-  portrait?: string | { src: string };
+  variant: "intro" | "brand" | "cta";
+  title1?: string | null;
+  title2?: string | null;
+  title3?: string | null;
+  title4?: string | null;
+  location?: string | null;
+  link?: string | null;
+  bg?: string | null;
+  portrait?: string | null;
 }
 
 const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 15000, stopOnInteraction: false })
+    Autoplay({ delay: 8000, stopOnInteraction: false }),
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi, setSelectedIndex]);
+  }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -46,156 +40,124 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
     emblaApi.on("select", onSelect);
   }, [emblaApi, onSelect]);
 
+  if (slides.length === 0) return null;
+
   return (
-    <section className="relative h-[670px] md:h-[570px] xl:h-[max(620px,min(850px,38vw))] overflow-hidden bg-black pt-24 md:pt-20" ref={emblaRef}>
+    <section
+      className="relative h-[720px] md:h-[620px] xl:h-[max(680px,min(820px,42vw))] overflow-hidden bg-black text-white pt-24 md:pt-20"
+      ref={emblaRef}
+    >
       <div className="flex h-full">
         {slides.map((slide, index) => (
           <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 h-full">
-            {/* Background */}
-            <div className={`absolute inset-0 ${typeof slide.bg === 'string' && slide.bg.startsWith('bg-') ? slide.bg : ''}`}>
-              {(typeof slide.bg !== 'string' || !slide.bg.startsWith('bg-')) && (
-                <>
-                  {/* Desktop Background */}
-                  <img
-                    src={(typeof slide.bg === 'string' ? (slide.bg || null) : (slide.bg ? (slide.bg as any).src : null)) as any}
-                    alt=""
-                    className="hidden md:block w-full h-full object-cover object-center xl:object-[82%_28%] 2xl:object-[85%_22%] min-[1920px]:object-[88%_18%] opacity-50 mix-blend-overlay"
-                  />
-                  {/* Mobile Background (Portrait Image) */}
-                  <img
-                    src={(typeof (slide.portrait || slide.bg) === 'string' ? (slide.portrait || slide.bg) : ((slide.portrait || slide.bg) ? (slide.portrait || slide.bg as any).src : null)) as any}
-                    alt=""
-                    className="md:hidden w-full h-full object-cover opacity-65 mix-blend-overlay"
-                  />
-                </>
-              )}
-            </div>
+            {/* Mobile: portrait image only */}
+            {slide.portrait && (
+              <img
+                src={slide.portrait}
+                alt=""
+                className="md:hidden absolute inset-0 w-full h-full object-cover object-top"
+              />
+            )}
+            {/* Desktop & tablet: background image only */}
+            {slide.bg && (
+              <img
+                src={slide.bg}
+                alt=""
+                className="hidden md:block absolute inset-0 w-full h-full object-cover object-center"
+              />
+            )}
+            {/* Mobile — dark bottom scrim for readable text, image visible at top */}
+            <div className="md:hidden absolute inset-0 bg-gradient-to-t from-black via-black/75 to-transparent" />
+            <div className="md:hidden absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/50 to-transparent" />
+            {/* Desktop — dark left fade for text */}
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/20" />
+            <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
 
-            <div className="relative z-10 w-full h-full flex flex-col md:flex-row items-center max-w-[1400px] mx-auto px-6 lg:px-12">
-              {/* Left Content */}
-              <div className="w-full md:w-[60%] flex flex-col justify-end md:justify-center text-center md:text-left h-full pb-24 md:pb-0">
+            <div className="relative z-10 w-full h-full flex flex-col items-center md:items-start max-w-[1400px] mx-auto px-6 lg:px-12 xl:px-16">
+              {/* Text Content */}
+              <div className="w-full md:w-[50%] lg:w-[44%] xl:max-w-2xl flex flex-col justify-end md:justify-center text-center md:text-left h-full pb-24 md:pb-0">
                 <AnimatePresence mode="wait">
                   {selectedIndex === index && (
                     <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 30 }}
-                      transition={{ duration: 0.5 }}
-                      className="space-y-1"
+                      key={slide.id}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -16 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      className="space-y-3 md:space-y-5 max-md:bg-black/70 max-md:backdrop-blur-sm max-md:rounded-2xl max-md:p-5 max-md:border max-md:border-white/10"
                     >
-                      <h2 className="text-sm md:text-base font-black text-white tracking-tighter uppercase whitespace-nowrap">
-                        {slide.title1}
-                      </h2>
-
-                      {slide.type === 'networking' && (
+                      {slide.variant === "intro" && (
                         <>
-                          <h1 className="text-4xl md:text-5xl lg:text-7xl leading-[0.85] font-black italic text-stroke-black text-white ml-[-4px]">
-                            <span className="marketing-red-gradient block text-stroke-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-                              {slide.title2}
-                            </span>
-                            <span className="marketing-red-gradient block text-stroke-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+                          {slide.title2 && (
+                            <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold leading-[0.95] tracking-tight drop-shadow-lg">
+                              <span className="gold-gradient-text">{slide.title2}</span>
+                            </h1>
+                          )}
+                          {slide.title3 && (
+                            <p className="text-sm md:text-lg text-[#D4AF37] font-semibold tracking-[0.12em] uppercase drop-shadow-md">
                               {slide.title3}
-                            </span>
-                          </h1>
-                          <p className="text-sm md:text-base font-black text-white tracking-tighter uppercase max-w-[240px] mx-auto md:max-w-md md:mx-0">
-                            {slide.title4}
-                          </p>
-                          <h1 className="text-3xl md:text-4xl lg:text-5xl leading-none font-black italic marketing-red-gradient text-stroke-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] uppercase max-w-[300px] mx-auto md:max-w-2xl md:mx-0">
-                            {slide.location}
-                          </h1>
-                          <p className="text-lg md:text-xl font-black text-white tracking-tighter uppercase mb-4">
-                            {slide.date}
-                          </p>
+                            </p>
+                          )}
+                          {slide.title4 && (
+                            <p className="text-base md:text-xl text-white/95 font-normal leading-relaxed max-w-xl mx-auto md:mx-0 drop-shadow-md">
+                              {slide.title4}
+                            </p>
+                          )}
+                          {slide.location && (
+                            <p className="text-sm md:text-base text-white/75 leading-relaxed max-w-xl mx-auto md:mx-0 border-l-2 border-[#D4AF37] pl-4 italic drop-shadow-md">
+                              {slide.location}
+                            </p>
+                          )}
                         </>
                       )}
 
-                      {slide.type === 'taxes' && (
+                      {slide.variant === "brand" && (
                         <>
-                          <h1 className="text-4xl md:text-5xl lg:text-7xl leading-[0.85] font-black italic text-[#fbbf24] tracking-tighter uppercase text-glow-yellow">
-                            {slide.title2}
-                          </h1>
-                          <div className="bg-white text-black inline-block px-3 py-1 text-xl md:text-2xl font-black uppercase">
-                            {slide.title3}
-                          </div>
-                          <p className="text-lg md:text-xl font-black text-[#fbbf24] tracking-tighter uppercase mb-4 max-w-[240px] mx-auto md:max-w-md md:mx-0">
-                            {slide.title4}
-                          </p>
+                          {slide.title1 && (
+                            <p className="text-[#D4AF37] text-sm tracking-[0.4em] uppercase font-medium drop-shadow-md">
+                              {slide.title1}
+                            </p>
+                          )}
+                          {slide.title2 && (
+                            <h2 className="text-3xl md:text-4xl lg:text-6xl font-display font-bold text-white leading-tight drop-shadow-lg">
+                              {slide.title2}
+                            </h2>
+                          )}
+                          {slide.title3 && (
+                            <h3 className="text-2xl md:text-3xl lg:text-5xl font-display font-bold leading-tight drop-shadow-lg">
+                              <span className="gold-gradient-text">{slide.title3}</span>
+                            </h3>
+                          )}
+                          {slide.title4 && (
+                            <blockquote className="text-base md:text-xl text-white/80 italic border-l-2 border-[#D4AF37] pl-5 py-1 max-w-lg mx-auto md:mx-0 drop-shadow-md">
+                              {slide.title4}
+                            </blockquote>
+                          )}
                         </>
                       )}
 
-                      {slide.type === 'podcast' && (
+                      {slide.variant === "cta" && (
                         <>
-                          <h1 className="text-4xl md:text-5xl lg:text-7xl leading-[0.85] font-black italic text-[#ff4d00] tracking-tighter uppercase">
-                            {slide.title2}
-                          </h1>
-                          <div className="bg-white/10 backdrop-blur-md border border-white/20 inline-block px-3 py-1 text-base md:text-xl font-black uppercase text-white">
-                            {slide.title3}
-                          </div>
-                          <h1 className="text-5xl md:text-6xl lg:text-[100px] leading-none font-black italic text-stroke-white text-transparent mb-4 uppercase">
-                            {slide.title4}
-                          </h1>
-                        </>
-                      )}
-
-                      {slide.type === 'ads' && (
-                        <>
-                          <div className="flex flex-wrap items-center gap-2 justify-center md:justify-start">
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black italic text-white uppercase leading-none">ADS</h1>
-                            <div className="bg-[#fbbf24] text-black px-3 py-0.5 text-2xl md:text-3xl font-black italic uppercase -skew-x-12">
-                              FROM
-                            </div>
-                            <div className="bg-[#fbbf24] text-black px-3 py-0.5 text-2xl md:text-3xl font-black italic uppercase -skew-x-12">
-                              ADAM COHEN
-                            </div>
-                          </div>
-                          <p className="text-base md:text-lg font-bold text-white italic uppercase max-w-[240px] mx-auto md:max-w-md md:mx-0">
-                            {slide.title3}
-                          </p>
-                          <div className="text-xl md:text-2xl font-black text-[#fbbf24] mb-4 uppercase max-w-[300px] mx-auto md:max-w-2xl md:mx-0">
-                            {slide.title4}
+                          {slide.title1 && (
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight drop-shadow-lg">
+                              <span className="gold-gradient-text">{slide.title1}</span>
+                            </h1>
+                          )}
+                          {slide.title4 && (
+                            <p className="text-lg md:text-2xl lg:text-3xl text-white/95 font-normal leading-snug max-w-2xl mx-auto md:mx-0 drop-shadow-md">
+                              {slide.title4}
+                            </p>
+                          )}
+                          <div className="pt-2">
+                            <Link
+                              href={slide.link || "/book"}
+                              className="hero-btn inline-flex items-center gap-2 !px-10 !py-4"
+                            >
+                              Book Adam Cohen <ChevronRight className="w-5 h-5" />
+                            </Link>
                           </div>
                         </>
                       )}
-
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="marketing-red-bg text-white px-8 py-2.5 rounded-sm font-black text-base tracking-tighter flex items-center gap-2 uppercase shadow-2xl mx-auto md:mx-0"
-                      >
-                        LEARN MORE <ChevronRight className="w-5 h-5" />
-                      </motion.button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Right Side Portrait */}
-              <div className="hidden w-full md:w-[40%] h-full relative flex items-center justify-center md:justify-end overflow-visible">
-                <AnimatePresence mode="wait">
-                  {selectedIndex === index && (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.6 }}
-                      className="relative h-full w-full max-w-[450px] flex items-end"
-                    >
-                      {/* Image with Mask */}
-                      <div className={`w-full h-full relative z-20 overflow-hidden ${slide.mask === 'hexagon' ? 'mask-hexagon' :
-                        slide.mask === 'sharp-cut' ? 'mask-sharp-cut' :
-                          slide.mask === 'arrow-right' ? 'mask-arrow-right' :
-                            ''
-                        }`}>
-                        {(slide.portrait || (slide.portrait as any)?.src) && (
-                          <img
-                            src={(typeof slide.portrait === 'string' ? slide.portrait : (slide.portrait ? (slide.portrait as any).src : null)) as any}
-                            alt="Adam Cohen"
-                            className="w-full h-full object-cover object-top"
-                          />
-                        )}
-                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -205,30 +167,38 @@ const HeroSection = ({ slides = [] }: { slides?: HeroSlideProps[] }) => {
         ))}
       </div>
 
-      {/* Navigation Controls */}
-      <button
-        onClick={scrollPrev}
-        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-black/80 text-white p-4 transition-all"
-      >
-        <ChevronLeft className="w-8 h-8" />
-      </button>
-      <button
-        onClick={scrollNext}
-        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/50 hover:bg-black/80 text-white p-4 transition-all"
-      >
-        <ChevronRight className="w-8 h-8" />
-      </button>
-
-      {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3">
-        {slides.map((_, i) => (
+      {/* Navigation */}
+      {slides.length > 1 && (
+        <>
           <button
-            key={i}
-            onClick={() => emblaApi?.scrollTo(i)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${selectedIndex === i ? 'w-8 bg-white' : 'bg-white/30'}`}
-          />
-        ))}
-      </div>
+            onClick={scrollPrev}
+            aria-label="Previous slide"
+            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/90 border border-white/20 text-white p-3 rounded-full transition-all"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={scrollNext}
+            aria-label="Next slide"
+            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/90 border border-white/20 text-white p-3 rounded-full transition-all"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => emblaApi?.scrollTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  selectedIndex === i ? "w-10 bg-[#D4AF37]" : "w-3 bg-white/30"
+                }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 };

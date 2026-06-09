@@ -14,38 +14,57 @@ interface HomeProjectCardProps {
     description: string;
     image: string;
     live_url?: string;
+    comingSoon?: boolean;
   };
   index: number;
   onClick?: () => void;
+  comingSoon?: boolean;
 }
 
-const HomeProjectCard = ({ project, index, onClick }: HomeProjectCardProps) => {
+const HomeProjectCard = ({ project, index, onClick, comingSoon = false }: HomeProjectCardProps) => {
+  const isComingSoon = comingSoon || project.comingSoon;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.65, delay: index * 0.08 }}
-      whileHover={{ y: -6 }}
-      onClick={onClick}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] transition-all duration-500 flex flex-col h-full bg-[#111111]"
+      whileHover={isComingSoon ? undefined : { y: -6 }}
+      onClick={isComingSoon ? undefined : onClick}
+      className={`group relative rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col h-full bg-[#111111] ${
+        isComingSoon
+          ? "opacity-90 border border-dashed border-primary/25"
+          : "cursor-pointer hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)]"
+      }`}
     >
-      {/* Photo */}
-      <div className="relative h-64 overflow-hidden">
-        {project.image && (
+      {/* CMS brand graphic */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#0a0a0a]">
+        {project.image ? (
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className={`w-full h-full object-contain object-center p-1 transition-transform duration-700 ${
+              isComingSoon ? "grayscale opacity-55" : "group-hover:scale-[1.02]"
+            }`}
             loading="lazy"
           />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-[#1a1508] via-[#111111] to-[#0a0a0a] flex items-center justify-center">
+            <span className="text-5xl font-display font-bold gold-gradient-text opacity-30">
+              {project.title.split(" ").slice(0, 2).map((w) => w[0]).join("")}
+            </span>
+          </div>
         )}
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        <div className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none ${isComingSoon ? "from-black/60" : ""}`} />
 
         {/* Tag badge (Top Right) */}
-        <span className="absolute top-4 right-4 text-[10px] font-bold tracking-[0.18em] uppercase px-3 py-1 rounded-full bg-black/50 text-[#D4AF37] border border-[#D4AF37]/30 backdrop-blur-sm">
-          {project.metric || "Project"}
+        <span className={`absolute top-4 right-4 text-[10px] font-bold tracking-[0.18em] uppercase px-3 py-1 rounded-full backdrop-blur-sm ${
+          isComingSoon
+            ? "bg-primary/20 text-primary border border-primary/40"
+            : "bg-black/50 text-[#D4AF37] border border-[#D4AF37]/30"
+        }`}>
+          {isComingSoon ? "Coming Soon" : (project.metric || "Project")}
         </span>
       </div>
 

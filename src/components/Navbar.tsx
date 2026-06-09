@@ -26,7 +26,7 @@ const navLinks: NavLink[] = [
     submenu: [
       { label: "Hard Money", href: "/real-estate/hard-money" },
       { label: "Private Equity", href: "/real-estate/private-equity" },
-      { label: "Blockchain", href: "/real-estate/blockchain" },
+      { label: "Blockchain", href: "/blockchain" },
     ],
   },
   {
