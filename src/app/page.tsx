@@ -158,19 +158,24 @@ export default async function Home() {
 
   const projects = [...liveProjects, ...comingSoonProjects];
 
+  const HOMEPAGE_RECENT_EPISODES = 6;
+
   const podcastVideos = Array.isArray(cohenTvVideosData)
-    ? cohenTvVideosData.filter((v: any) => v.type === 'Podcast' && v.is_published).map((v: any) => ({
-      id: v.id,
-      number: String(v.order || "0"),
-      title: v.title,
-      description: v.description || "",
-      duration: v.duration || "0m",
-      tag: "Video",
-      link: v.link,
-      host: v.host || "Adam Cohen",
-      thumbnail: v.thumbnail,
-      is_video: true
-    })).slice(0, 4)
+    ? cohenTvVideosData
+        .filter((v: any) => v.type === "Podcast" && v.is_published)
+        .map((v: any, index: number) => ({
+          id: v.id,
+          number: v.order != null && v.order !== "" ? String(v.order) : String(index + 1),
+          title: v.title,
+          description: v.description || "",
+          duration: v.duration || "0m",
+          tag: "Video",
+          link: v.link,
+          host: v.host || "Adam Cohen",
+          thumbnail: v.thumbnail,
+          is_video: true,
+        }))
+        .slice(0, HOMEPAGE_RECENT_EPISODES + 1)
     : [];
 
   const liveEpisodes = podcastVideos;
@@ -193,7 +198,11 @@ export default async function Home() {
       <AboutSection />
       <ServicesSection services={services} />
       <ProjectsSection projects={projects} />
-      <PodcastSection featuredEpisode={liveEpisodes[0]} recentEpisodes={liveEpisodes.slice(1)} />
+      <PodcastSection
+        featuredEpisode={liveEpisodes[0]}
+        recentEpisodes={liveEpisodes.slice(1, HOMEPAGE_RECENT_EPISODES + 1)}
+        recentLimit={HOMEPAGE_RECENT_EPISODES}
+      />
       <TestimonialsSection testimonials={testimonials} />
       <NewsletterSection />
       <CallToAction />

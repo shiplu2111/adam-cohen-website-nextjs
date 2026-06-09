@@ -25,12 +25,16 @@ interface EpisodeProps {
 
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@adamscohentoday?sub_confirmation=1";
 
+const HOMEPAGE_RECENT_EPISODES = 6;
+
 const PodcastSection = ({
   featuredEpisode,
-  recentEpisodes = []
+  recentEpisodes = [],
+  recentLimit = HOMEPAGE_RECENT_EPISODES,
 }: {
   featuredEpisode?: EpisodeProps;
   recentEpisodes?: EpisodeProps[];
+  recentLimit?: number;
 }) => {
   const { playTrack, currentTrack, isPlaying: isAudioPlaying, pauseTrack } = useAudioPlayer();
   const [activeEp, setActiveEp] = useState<EpisodeProps | null>(featuredEpisode || recentEpisodes[0] || null);
@@ -42,10 +46,7 @@ const PodcastSection = ({
 
   if (!mounted || !activeEp) return null;
 
-  const listEps = [
-    ...(featuredEpisode ? [featuredEpisode] : []),
-    ...recentEpisodes
-  ].filter(ep => ep.id !== activeEp.id);
+  const listEps = recentEpisodes.slice(0, recentLimit);
 
   return (
     <section
@@ -223,7 +224,7 @@ const PodcastSection = ({
             <p className="text-xs font-bold tracking-[0.25em] uppercase mb-0 sm:mb-1 text-white/30">Recent Episodes</p>
             {listEps.map((ep, i) => (
               <motion.div
-                key={ep.number}
+                key={ep.id ?? ep.link ?? `episode-${i}`}
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
